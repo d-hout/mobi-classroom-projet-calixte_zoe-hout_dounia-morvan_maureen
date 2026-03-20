@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CounterContext } from "./contexte/counterContext";
+import { CounterContext } from "./assets/counterContext";
 
 export default function Child() {
   const { counter, increment } = useContext(CounterContext);

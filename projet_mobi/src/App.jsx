@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import './App.css'
 import CounterContextProvider from './assets/counterContext'
 import Child from './Child'
+import Header from './components/Header';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -26,16 +27,15 @@ function App() {
   }
 
   return (
-    <>
-    <div>
-        <h1>Bienvenue {user.displayName}</h1>
-        <p>{user.email}</p>
-    </div>
-      {/* <CounterContextProvider>
-        <Child/>
-        
-        <LoginPage/>
-      </CounterContextProvider> */}
+    <>    
+      <CounterContextProvider>
+          <div>
+            <Header/>
+            <h1>Bienvenue {user.displayName}</h1>
+            <p>{user.email}</p>
+            <Child/>
+          </div>
+      </CounterContextProvider>
     </>
   )
 }

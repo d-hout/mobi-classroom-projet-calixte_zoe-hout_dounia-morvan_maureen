@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import CounterContextProvider from './contexte/counterContext'
+import Child from './Child'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -7,7 +9,7 @@ function App() {
   return (
     <>
       <CounterContextProvider>
-        <Button></Button>
+        <Child/>
       </CounterContextProvider>
     </>
   )

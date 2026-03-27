@@ -1,0 +1,25 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  gap: 3rem; /* espace entre les boutons */
+}
+
+.bouton-blue {
+  background-color: #FFF !important;
+  color: #113CCF !important;
+}
+
+.bouton-blue:hover {
+  background-color: #113CCF !important;
+  color: #FFF !important;
+}

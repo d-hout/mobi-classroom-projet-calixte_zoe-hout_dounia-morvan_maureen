@@ -184,7 +184,7 @@
   opacity: 0.95;
 }
 
-.bg-circle.pink {
+.bg-circle.blue {
   width: 320px;
   height: 320px;
   background: rgba(17, 60, 207, 0.14);
@@ -198,14 +198,6 @@
   background: rgba(255, 209, 102, 0.85);
   right: 140px;
   top: 40px;
-}
-
-.bg-circle.green {
-  width: 82px;
-  height: 82px;
-  background: rgba(77, 168, 255, 0.8);
-  right: 156px;
-  top: 228px;
 }
 
 .mock-card {

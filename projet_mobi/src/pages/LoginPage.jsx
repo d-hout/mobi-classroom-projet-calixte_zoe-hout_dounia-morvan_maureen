@@ -5,7 +5,6 @@ import "./loginPage.css";
 import minnieImg from "../assets/minie.jpg";
 import simbaImg from "../assets/simba.jpg";
 
-
 function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,14 +31,14 @@ function LoginPage() {
             rel="stylesheet"
           ></link>
           <h2>
-            Bienvenue dans l'univers Disney 
+            Bienvenue dans l'univers Disney
             <br />
             <span> Crée ton deck pour remporter la partie </span>
           </h2>
 
           <p>
-            Un jeu de cartes immersif 
-            <br/>
+            Un jeu de cartes immersif
+            <br />
           </p>
 
           <div className="hero-actions">
@@ -58,9 +57,8 @@ function LoginPage() {
 
         <div className="hero-right">
           <div className="visual-card">
-            <div className="bg-circle pink" />
+            <div className="bg-circle blue" />
             <div className="bg-circle yellow" />
-            <div className="bg-circle green" />
 
             <div className="mock-card minnie">
               <div className="mock-image ">

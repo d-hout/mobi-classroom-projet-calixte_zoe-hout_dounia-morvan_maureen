@@ -10,10 +10,12 @@ import StyleIcon from "@mui/icons-material/Style";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { logoutUser } from "../services/authService";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -36,25 +38,34 @@ export default function Header() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "#f0d7ca",
-          color: "#000",
+          backgroundColor: "#0E32A8",
+          color: "#FFF",
           borderRadius: "20px",
-          marginBottom: "20px",
+          marginTop: "10px",
         }}
       >
         <Toolbar>
-          <CastleIcon />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              fontWeight: "bold",
-              marginLeft: "10px",
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            DISNEY
-          </Typography>
+            <CastleIcon />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: "bold", marginLeft: "10px" }}
+            >
+              DISNEY
+            </Typography>
+          </Link>
+
+          <Box sx={{ flexGrow: 1 }} />
+
           {auth && (
             <div>
               <IconButton

@@ -7,6 +7,8 @@ import CounterContextProvider from "./assets/counterContext";
 import Header from "./components/Header";
 import DisneyTest from "./components/DisneyTest"; // ajouté
 import HomePage from "./pages/HomePage";
+import DeckPage from "./pages/DeckPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -24,20 +26,13 @@ function App() {
     return <p>Chargement...</p>;
   }
 
-  if (!user) {
-    return <LoginPage />;
-  }
-
   return (
-    <>
-      <CounterContextProvider>
-        <div>
-          <HomePage />
-          <h2>Test cartes</h2>
-          <DisneyTest />
-        </div>
-      </CounterContextProvider>
-    </>
+    <CounterContextProvider>
+      <Routes>
+        <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
+        <Route path="/DeckPage" element={user ? <DeckPage /> : <LoginPage />} />
+      </Routes>
+    </CounterContextProvider>
   );
 }
 

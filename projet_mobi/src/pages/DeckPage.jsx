@@ -5,77 +5,10 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Header from "../components/Header";
+import Cartes from "../components/cartes";
 import { fetchDisneyCharacters } from "../services/disneyService";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../services/firebaseConfig";
-
-function CardTile({ card, onAdd, onRemove, inDeck, disabled }) {
-  return (
-    <div
-      style={{
-        width: 160,
-        margin: 8,
-        border: "1px solid #eee",
-        borderRadius: 6,
-        background: "#fff",
-      }}
-    >
-      <div
-        style={{
-          height: 120,
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src={card.image}
-          alt={card.name}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
-      </div>
-      <div style={{ padding: 8 }}>
-        <div
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {card.name}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 8,
-          }}
-        >
-          {inDeck ? (
-            <Button
-              size="small"
-              color="error"
-              onClick={() => onRemove(String(card.id))}
-            >
-              Retirer
-            </Button>
-          ) : (
-            <Button
-              size="small"
-              onClick={() => onAdd(String(card.id))}
-              disabled={disabled}
-            >
-              Ajouter
-            </Button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function DeckPage() {
   const [cards, setCards] = useState([]);
@@ -264,7 +197,7 @@ export default function DeckPage() {
             <Grid container>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {cards.map((c) => (
-                  <CardTile
+                  <Cartes
                     key={c.id}
                     card={c}
                     onAdd={handleAdd}
@@ -326,7 +259,6 @@ export default function DeckPage() {
     </>
   );
 }
-
 
 async function findByName(term, pageSize = 50) {
   const allFound = [];

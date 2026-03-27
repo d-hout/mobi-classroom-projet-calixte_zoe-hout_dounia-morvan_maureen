@@ -12,13 +12,11 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const unsubscribe = observeAuth((firebaseUser) => {
       setUser(firebaseUser || null);
     });
-
     return () => unsubscribe();
   }, []);
 

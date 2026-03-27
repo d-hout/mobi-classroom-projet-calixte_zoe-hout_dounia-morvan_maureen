@@ -1,17 +1,15 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { logoutUser } from '../services/authService';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CastleIcon from "@mui/icons-material/Castle";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import StyleIcon from "@mui/icons-material/Style";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { logoutUser } from "../services/authService";
 
 export default function Header() {
   const [auth, setAuth] = React.useState(true);
@@ -31,26 +29,44 @@ export default function Header() {
 
   async function handleDeconnexion() {
     await logoutUser();
-  };
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#f0d7ca",
+          color: "#000",
+          borderRadius: "20px",
+          marginBottom: "20px",
+        }}
+      >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <CastleIcon />
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              fontWeight: "bold",
+              marginLeft: "10px",
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
+            DISNEY
           </Typography>
           {auth && (
             <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleClose}
+                color="inherit"
+              >
+                <StyleIcon />
+              </IconButton>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -65,13 +81,13 @@ export default function Header() {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}

@@ -18,12 +18,36 @@ export default function GamePage() {
 
   if (!game || !user) return <div>Chargement...</div>;
 
+  // Plus propre: on attend vraiment que la partie soit prête
+  if (game.status !== "playing" || !game.playerA || !game.playerB) {
+    const amPlayerA = game.playerAUser?.uid === user.uid;
+    const meReady = amPlayerA
+      ? game.playerAUser?.deckReady
+      : game.playerBUser?.deckReady;
+
+    const opponentReady = amPlayerA
+      ? game.playerBUser?.deckReady
+      : game.playerAUser?.deckReady;
+
+    
+    return (
+      <div style={{ padding: 24 }}>
+        <h2>Partie en attente</h2>
+        <p>ID de la partie : {gameId}</p>
+        <p>Mon deck prêt : {meReady ? "Oui" : "Non"}</p>
+        <p>Deck adverse prêt : {opponentReady ? "Oui" : "Non"}</p>
+        <p>En attente que les deux joueurs valident leur deck...</p>
+      </div>
+    );
+  }
+
   const isPlayerA = game.playerA?.uid === user.uid;
   const me = isPlayerA ? game.playerA : game.playerB;
   const opponent = isPlayerA ? game.playerB : game.playerA;
   const isMyTurn = game.currentTurn === user.uid;
   const pendingAttack = game.pendingAttack;
-  const amDefender = pendingAttack?.defenderPlayerKey === (isPlayerA ? 'playerA' : 'playerB');
+  const amDefender =
+    pendingAttack?.defenderPlayerKey === (isPlayerA ? "playerA" : "playerB");
 
   return (
     <BattleArena //composant d'affichage du plateau de jeu

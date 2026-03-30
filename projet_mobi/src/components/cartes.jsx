@@ -1,11 +1,16 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { getDisplayImageUrl, handleImageError } from "../utils/imageUtils";
 
 export default function Cartes({ card, onAdd, onRemove, inDeck, disabled }) {
   return (
     <div className="card-tile">
       <div className="card-media">
-        <img src={card.image} alt={card.name} />
+        <img
+          src={getDisplayImageUrl(card.image)}
+          alt={card.name}
+          onError={handleImageError}
+        />
       </div>
       <div className="card-body">
         <div className="card-name">{card.name}</div>

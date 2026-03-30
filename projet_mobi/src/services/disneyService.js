@@ -1,4 +1,5 @@
 const BASE_URL = "https://api.disneyapi.dev";
+import { getValidatedImageUrl } from "../utils/imageUtils";
 
 export const fetchDisneyCharacters = async (page = 1, limit = 50) => {
   try {
@@ -8,14 +9,17 @@ export const fetchDisneyCharacters = async (page = 1, limit = 50) => {
     if (!res.ok) return [];
     const json = await res.json();
     const items = json.data || [];
-    return items
-      .filter((c) => c.imageUrl)
-      .map((c) => ({
-        id: c._id ?? c.id,
-        name: c.name,
-        image: c.imageUrl,
-        description: c.shortFilms?.join(", ") || c.films?.join(", ") || "",
-      }));
+    const mappedItems = await Promise.all(
+      items
+        .filter((c) => c.imageUrl)
+        .map(async (c) => ({
+          id: c._id ?? c.id,
+          name: c.name,
+          image: await getValidatedImageUrl(c.imageUrl),
+          description: c.shortFilms?.join(", ") || c.films?.join(", ") || "",
+        }))
+    );
+    return mappedItems;
   } catch (err) {
     console.error("fetchDisneyCharacters failed:", err);
     return [];
@@ -32,7 +36,7 @@ export const fetchCharacterById = async (id) => {
       ? {
           id: c._id ?? c.id,
           name: c.name,
-          image: c.imageUrl,
+          image: await getValidatedImageUrl(c.imageUrl),
           description: c.description || "",
         }
       : null;

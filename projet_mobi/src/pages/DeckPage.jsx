@@ -9,6 +9,16 @@ import Cartes from "../components/cartes";
 import { fetchDisneyCharacters } from "../services/disneyService";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../services/firebaseConfig";
+import {
+  getDisplayImageUrl,
+  getValidatedImageUrl,
+  handleImageError,
+} from "../utils/imageUtils";
+import { useNavigate, useParams } from "react-router-dom"; // ✅ AJOUT
+import {
+  lockDeckForGame,
+  subscribeToGame,
+} from "../services/gameService"; // ✅ AJOUT
 
 export default function DeckPage() {
   const [cards, setCards] = useState([]);
@@ -17,13 +27,20 @@ export default function DeckPage() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [game, setGame] = useState(null); // ✅ AJOUT : pour suivre l'état de la partie
+  const [saving, setSaving] = useState(false); // ✅ AJOUT : éviter les doubles clics
   const pageSize = 48;
   const uid = auth?.currentUser?.uid;
 
+  const navigate = useNavigate(); // ✅ AJOUT
+  const { gameId } = useParams(); // ✅ AJOUT
+
   useEffect(() => {
-    if (query && query.trim().length > 0) return; // si une recherche est active, on n'appelle pas la pagination normale
+    if (query && query.trim().length > 0) return;
+
     let mounted = true;
     setLoading(true);
+
     fetchDisneyCharacters(page, pageSize)
       .then((list) => {
         if (!mounted) return;
@@ -49,6 +66,7 @@ export default function DeckPage() {
         console.error("loadDeck", err);
       }
     }
+
     loadDeck();
 
     return () => {
@@ -56,54 +74,86 @@ export default function DeckPage() {
     };
   }, [uid, page, query]);
 
+  // ✅ AJOUT : écoute la partie pour savoir si les 2 decks sont prêts
+  useEffect(() => {
+    if (!gameId) return;
+    const unsub = subscribeToGame(gameId, setGame);
+    return unsub;
+  }, [gameId]);
+
   const handleAdd = (cardId) => {
+    const normalizedId = String(cardId); // ✅ MODIF
     if (selected.length >= 10) return;
-    if (!selected.includes(cardId)) setSelected((s) => [...s, cardId]);
+    if (!selected.includes(normalizedId)) {
+      setSelected((s) => [...s, normalizedId]);
+    }
   };
 
   const handleRemove = (cardId) =>
-    setSelected((s) => s.filter((id) => id !== cardId));
+    setSelected((s) => s.filter((id) => id !== String(cardId))); // ✅ MODIF
 
   const handleSave = async () => {
     if (!uid) return alert("Connecte-toi d'abord.");
-    if (selected.length !== 10)
+    if (!gameId) return alert("Aucune partie sélectionnée."); // ✅ AJOUT
+    if (selected.length !== 10) {
       return alert("Le deck doit contenir exactement 10 cartes.");
+    }
+
     try {
-      const ref = doc(db, "users", uid, "deck", "main");
+      setSaving(true); // ✅ AJOUT
+
+      const userDeckRef = doc(db, "users", uid, "deck", "main");
+
       await setDoc(
-        ref,
-        { cards: selected, updatedAt: serverTimestamp() },
-        { merge: true },
+        userDeckRef,
+        {
+          cards: selected,
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
       );
-      alert("Deck sauvegardé.");
+
+      // ✅ AJOUT : verrouille le deck pour cette partie
+      await lockDeckForGame(gameId, auth.currentUser, selected);
+      alert("Deck sauvegardé pour la partie.");
+      navigate(`/game/${gameId}`);
+      // ✅ MODIF :
+      // on ne force pas navigate("/game/...") ici directement,
+      // parce qu'on attend que la partie passe en status = "playing"
+      // grâce au subscribeToGame.
     } catch (err) {
       console.error("save deck", err);
-      alert("Erreur lors de la sauvegarde.");
+      alert(err.message || "Erreur lors de la sauvegarde.");
+    } finally {
+      setSaving(false); // ✅ AJOUT
     }
   };
 
   const loadMore = () => setPage((p) => p + 1);
 
-  // Recherche paginée simple : parcourt jusqu'à 10 pages max
   const onSearch = async () => {
     const term = query.trim();
+
     if (!term) {
       setPage(1);
       setCards([]);
       setIsSearching(false);
       return;
     }
+
     setIsSearching(true);
     setLoading(true);
+
     try {
       const found = await findByName(term, pageSize);
-      setCards(
-        found.map((c) => ({
+      const normalizedCards = await Promise.all(
+        found.map(async (c) => ({
           id: c._id ?? c.id,
           name: c.name,
-          image: c.imageUrl || c.image,
-        })),
+          image: await getValidatedImageUrl(c.imageUrl || c.image),
+        }))
       );
+      setCards(normalizedCards);
     } catch (err) {
       console.error("search error", err);
       setCards([]);
@@ -112,6 +162,21 @@ export default function DeckPage() {
       setIsSearching(false);
     }
   };
+
+  // ✅ AJOUT : infos lobby simples
+  const myReady =
+    game?.playerAUser?.uid === uid
+      ? game?.playerAUser?.deckReady
+      : game?.playerBUser?.uid === uid
+      ? game?.playerBUser?.deckReady
+      : false;
+
+  const opponentReady =
+    game?.playerAUser?.uid === uid
+      ? game?.playerBUser?.deckReady
+      : game?.playerBUser?.uid === uid
+      ? game?.playerAUser?.deckReady
+      : false;
 
   return (
     <>
@@ -124,6 +189,15 @@ export default function DeckPage() {
       >
         Création du deck
       </Typography>
+
+      {/* ✅ AJOUT : petit état du lobby */}
+      {gameId && (
+        <div style={{ marginLeft: "10px", marginBottom: "16px" }}>
+          <p>ID de la partie : {gameId}</p>
+          <p>Mon deck prêt : {myReady ? "Oui" : "Non"}</p>
+          <p>Deck adverse prêt : {opponentReady ? "Oui" : "Non"}</p>
+        </div>
+      )}
 
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
         <div>
@@ -203,7 +277,9 @@ export default function DeckPage() {
                     onAdd={handleAdd}
                     onRemove={handleRemove}
                     inDeck={selected.includes(String(c.id))}
-                    disabled={selected.length >= 10}
+                    disabled={
+                      selected.length >= 10 && !selected.includes(String(c.id))
+                    } // ✅ MODIF
                   />
                 ))}
               </div>
@@ -219,15 +295,18 @@ export default function DeckPage() {
           >
             Résumé
           </Typography>
+
           <p>Cartes sélectionnées: {selected.length} / 10</p>
+
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {selected.map((id) => {
               const c = cards.find((x) => String(x.id) === String(id));
               return c ? (
                 <div key={id} style={{ width: 80, margin: 4 }}>
                   <img
-                    src={c.image}
+                    src={getDisplayImageUrl(c.image)}
                     alt={c.name}
+                    onError={handleImageError}
                     style={{ width: "100%", height: 60, objectFit: "cover" }}
                   />
                 </div>
@@ -244,14 +323,15 @@ export default function DeckPage() {
               );
             })}
           </div>
+
           <div style={{ marginTop: 12 }}>
             <Button
               variant="contained"
               color="primary"
               onClick={handleSave}
-              disabled={selected.length !== 10}
+              disabled={selected.length !== 10 || saving} // ✅ MODIF
             >
-              Sauvegarder le deck
+              {saving ? "Sauvegarde..." : "Sauvegarder le deck"}
             </Button>
           </div>
         </Paper>
@@ -263,19 +343,25 @@ export default function DeckPage() {
 async function findByName(term, pageSize = 50) {
   const allFound = [];
   let p = 1;
+
   while (true) {
     const res = await fetch(
-      `https://api.disneyapi.dev/character?page=${p}&pageSize=${pageSize}`,
+      `https://api.disneyapi.dev/character?page=${p}&pageSize=${pageSize}`
     );
     if (!res.ok) break;
+
     const json = await res.json();
+
     const matches = (json.data || []).filter(
-      (c) => c.name && c.name.toLowerCase().includes(term.toLowerCase()),
+      (c) => c.name && c.name.toLowerCase().includes(term.toLowerCase())
     );
+
     if (matches.length) allFound.push(...matches);
     if (!json.info || (json.data || []).length < pageSize) break;
+
     p++;
-    if (p > 10) break; // limite raisonnable
+    if (p > 10) break;
   }
+
   return allFound;
 }

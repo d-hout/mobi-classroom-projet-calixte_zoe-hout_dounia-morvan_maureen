@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchDisneyCharacters } from "../services/disneyService";
+import { getDisplayImageUrl, handleImageError } from "../utils/imageUtils";
 
 export default function DisneyTest({ page = 1 }) {
   const [chars, setChars] = useState([]);
@@ -10,7 +11,6 @@ export default function DisneyTest({ page = 1 }) {
 
   useEffect(() => {
     let mounted = true;
-    setLoading(true);
     fetchDisneyCharacters(page)
       .then((list) => {
         if (!mounted) return;
@@ -40,8 +40,9 @@ export default function DisneyTest({ page = 1 }) {
         <div key={c.id} style={{ width: 140, textAlign: "center" }}>
           {c.image ? (
             <img
-              src={c.image}
+              src={getDisplayImageUrl(c.image)}
               alt={c.name}
+              onError={handleImageError}
               style={{
                 width: 120,
                 height: 120,

@@ -1,0 +1,2279 @@
+[
+  {
+    "id": "112",
+    "name": "Achilles",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/67/HATS_Achilles.png",
+    "films": [
+      "Hercules (film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Hercules (TV series)"
+    ],
+    "videoGames": [
+      "Kingdom Hearts III"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "18",
+    "name": "Abigail the Cow",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/05/Fox-disneyscreencaps_com-901.jpg",
+    "films": [
+      "The Fox and the Hound",
+      "The Fox and the Hound 2"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "16",
+    "name": "Abdullah",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/3a/Abdullah.jpg",
+    "films": [
+      "Cheetah"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "45",
+    "name": "Admiral Boom and Mr. Binnacle",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/be/Marypoppins-disneyscreencaps_com-1086.jpg",
+    "films": [
+      "Mary Poppins (film)",
+      "Mary Poppins Returns"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Disney Movie Magic"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "7",
+    "name": ".GIFfany",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/51/Giffany.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Gravity Falls"
+    ],
+    "videoGames": [
+      "Disney Heroes: Battle Mode"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "12",
+    "name": "90's Adventure Bear",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/3f/90%27s_Adventure_Bear_profile.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Pickle and Peanut"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "36",
+    "name": "Candace Adams",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/8b/Enemy_of_the_State_promo_3.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "K.C. Undercover"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "139",
+    "name": "Ahadi",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/b3/Ahadihead.png",
+    "films": [
+      "The Lion King",
+      "The Lion King (2019 film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "152",
+    "name": "Al Muddy Sultan",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e0/Almuddyking.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Aladdin (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "181",
+    "name": "Irwina Allen",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6a/Irwina_Allen.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Chip 'n Dale Rescue Rangers"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "204",
+    "name": "Ambrose",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d3/Ambrose.jpg",
+    "films": [
+      "The Robber Kitten",
+      "Mickey's Polo Team"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "215",
+    "name": "Amos",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/37/Profile_-_Amos.jpeg",
+    "films": [
+      "Ben and Me"
+    ],
+    "shortFilms": [
+      "Once Upon a Studio"
+    ],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "295",
+    "name": "Arabella Smith",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/da/Bella_sign.webp",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Tortuga Tavern"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "310",
+    "name": "Queen Ariel",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e8/Char_49883.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "DuckTales"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "327",
+    "name": "Arthur and Cecil",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e9/Arthur_%26_Cecil.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Jungle Cubs"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "336",
+    "name": "Fiona Ashbury",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/ed/Fiona_Ashbury.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Fillmore!"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "337",
+    "name": "Ashcan and Pete",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e3/Ashcan_and_Pete.png",
+    "films": [
+      "Homeward Bound II: Lost in San Francisco"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "342",
+    "name": "Aspen",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/8b/Bedtime_stories_aspen.jpg",
+    "films": [
+      "Bedtime Stories"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "347",
+    "name": "Astuto",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/3e/Lion_Guard_S03E014_-_Astuto_%28fox%29_Profile.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Lion Guard"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "350",
+    "name": "Athena",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/db/Athena_Tomorrowland.jpg",
+    "films": [
+      "Tomorrowland (film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "364",
+    "name": "Aunt Em",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/5d/Em4.jpg",
+    "films": [
+      "Return to Oz"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Once Upon a Time"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "380",
+    "name": "Aviarius",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/99/Aviarius.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Kim Possible"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "384",
+    "name": "Prince Axel",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/81/Prince_Axel.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "404",
+    "name": "Butter Otter",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/18/Baby-Butter-Otter-Image-Profile.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "PB&J Otter"
+    ],
+    "videoGames": [],
+    "parkAttractions": [
+      "Disney Stars and Motor Cars Parade"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "440",
+    "name": "Marta Balatico",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d0/27_marta.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Mackenzie Falls"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "442",
+    "name": "Mr. Baldwin",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/2c/Baldwin_picture.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Fish Hooks"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "450",
+    "name": "Baloo",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/31/Profile_-_Baloo.jpeg",
+    "films": [
+      "The Jungle Book",
+      "The Jungle Book 2",
+      "Mickey's Magical Christmas: Snowed in at the House of Mouse",
+      "Mickey's House of Villains"
+    ],
+    "shortFilms": [
+      "Once Upon a Studio"
+    ],
+    "tvShows": [
+      "The Mouse Factory",
+      "Jungle Cubs",
+      "House of Mouse"
+    ],
+    "videoGames": [
+      "The Jungle Book (video game)",
+      "The Jungle Book Groove Party",
+      "Disney Universe",
+      "Kinect: Disneyland Adventures",
+      "Disney Infinity (series)",
+      "Disney Crossy Road",
+      "Disney Emoji Blitz",
+      "Disney Magic Kingdoms",
+      "Disney Heroes: Battle Mode",
+      "Disney Sorcerer's Arena",
+      "Just Dance: Disney Party",
+      "Disney Speedstorm",
+      "Disney Solitaire"
+    ],
+    "parkAttractions": [
+      "Mickey's Magical TV World",
+      "Fantasmic!",
+      "It's a Small World",
+      "It's a Small World with Groot",
+      "Mickey Mouse Revue",
+      "Celebrate a Dreams Come True Parade",
+      "Mickey's Jammin' Jungle Parade",
+      "Mickey's Jingle Jungle Parade",
+      "Disney Stars and Motorcars Parade",
+      "Parade of the Stars",
+      "World of Color",
+      "Mickey and the Wondrous Book",
+      "La Forêt de l'Enchantement: Une aventure musicale Disney",
+      "Happily Ever After (fireworks show)",
+      "Drawn To Life",
+      "Disney KiteTails"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "469",
+    "name": "Michael Banks",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/40/Michael_Banks.gif",
+    "films": [
+      "Mary Poppins (film)",
+      "Mary Poppins Returns"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "474",
+    "name": "Banshee",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/54/Chip_%27n_Dale_Rescue_Rangers_226_The_Last_Leprechaun_arsenaloyal_-_YouTube12.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Chip 'n Dale Rescue Rangers"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "490",
+    "name": "Baron Blitz",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/4b/Baron_Blitz.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Teamo Supremo"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "500",
+    "name": "Sir Bart",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6d/Sword-in-stone-disneyscreencaps.com-8698.jpg",
+    "films": [
+      "The Sword in the Stone"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "529",
+    "name": "Bernice Beachmont",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e1/Bernice_Beachmont.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Fillmore!"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "543",
+    "name": "Beardini the Pirate Magician",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/27/Beardini01.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Jake and the Never Land Pirates"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "566",
+    "name": "Beheaded Knight",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/fb/Beheaded_Knight.png",
+    "films": [
+      "The Haunted Mansion (film)",
+      "Haunted Mansion (2023 film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [
+      "The Haunted Mansion (video game)",
+      "Kinect: Disneyland Adventures",
+      "Disney Crossy Road"
+    ],
+    "parkAttractions": [
+      "The Haunted Mansion"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "157",
+    "name": "Alan Coleman",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/c0/Alan_Coleman.jpg",
+    "films": [
+      "Freaky Friday (2003 film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "189",
+    "name": "Alma",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6b/SadAlma.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Doc McStuffins"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "206",
+    "name": "Captain Amelia",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/0c/Profile_-_Captain_Amelia.png",
+    "films": [
+      "Treasure Planet"
+    ],
+    "shortFilms": [
+      "Once Upon a Studio"
+    ],
+    "tvShows": [],
+    "videoGames": [
+      "Treasure Planet: Battle at Procyon",
+      "Disney Heroes: Battle Mode"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "207",
+    "name": "Amelia Duckworth",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/ad/Queen_Of_Dumb.jpeg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Bizaardvark"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "223",
+    "name": "Captain Anderson",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/bc/CaptainAndersonCatFromSpace.jpg",
+    "films": [
+      "The Cat from Outer Space"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "241",
+    "name": "Erica Ange",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/88/Erica_pic.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "247",
+    "name": "Angela",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/cb/Angela_Fishberger.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Fish Hooks"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "268",
+    "name": "Anthony Biddle",
+    "image": "https://static.wikia.nocookie.net/disney/images/7/78/Anthony_Biddle.jpg",
+    "films": [
+      "The Happiest Millionaire"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "285",
+    "name": "Apothecary Gary",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/aa/ApothecaryGary.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Amphibia"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "291",
+    "name": "Aqua",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/0a/Aqua_KHIII.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [
+      "Kingdom Hearts: Birth by Sleep",
+      "Kingdom Hearts coded",
+      "Kingdom Hearts 3D: Dream Drop Distance",
+      "Kingdom Hearts HD II.8 Final Chapter Prologue",
+      "Kingdom Hearts III",
+      "Kingdom Hearts: Melody of Memory",
+      "Kingdom Hearts Dark Road",
+      "Disney Emoji Blitz",
+      "Disney Tsum Tsum",
+      "Super Smash Bros. Ultimate"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "303",
+    "name": "Archibald Smelding",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/a6/Archibald_Smelding.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Tower of Terror"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "322",
+    "name": "Mr. Arrow",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/51/Profile_-_Mr._Arrow.png",
+    "films": [
+      "Treasure Planet"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "351",
+    "name": "Queen Athena",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/41/Athena_TLM.jpg",
+    "films": [
+      "The Little Mermaid: Ariel's Beginning"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "367",
+    "name": "Aunt Gertie",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/cd/Aunt-Gertie.jpg",
+    "films": [
+      "Mickey's Once Upon a Christmas"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "378",
+    "name": "Avatar Singh",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/20/Avatar_Singh.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "379",
+    "name": "Avemetrus",
+    "image": "https://static.wikia.nocookie.net/disney/images/7/70/Avemetrus.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "American Dragon: Jake Long"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "392",
+    "name": "B-Dawg",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/2d/Air-buddies-765015l-imagine.jpg",
+    "films": [
+      "Air Buddies",
+      "Snow Buddies",
+      "Space Buddies",
+      "Santa Buddies",
+      "Spooky Buddies",
+      "Treasure Buddies",
+      "Super Buddies"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "435",
+    "name": "Baker",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/83/Profile_-_Baker.jpg",
+    "films": [
+      "Cinderella II: Dreams Come True",
+      "Cinderella III: A Twist in Time"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "441",
+    "name": "Princess Baldegunde",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6b/Baldegunde.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Phineas and Ferb"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "485",
+    "name": "Barnaby",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/96/Dc006.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Dumbo's Circus"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "503",
+    "name": "Jimmy Bartin",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/02/JIMMY.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Good Luck Charlie"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "514",
+    "name": "Basuli",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/8d/Basuri_eagle_feather.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Legend of Tarzan"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "524",
+    "name": "Nia Baxter-Carter",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/af/Raven%27s_Home_-_Season_3_-_Nia_Baxter-Carter.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Raven's Home",
+      "Bunk'd"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "555",
+    "name": "Becky Gibson",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/b4/Becky_Gibson.png",
+    "films": [
+      "Alexander and the Terrible, Horrible, No Good, Very Bad Day"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "47",
+    "name": "Adonis",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/ca/Adonis.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Hercules (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "133",
+    "name": "Agent Gordon",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/51/Screenshot_2016-09-12_at_8.13.42_PM.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Lab Rats"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "137",
+    "name": "Aggro",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/9c/Aggro.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Miles from Tomorrowland"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "145",
+    "name": "Ajay",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e3/Ajay.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Proud Family"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "146",
+    "name": "Ajed Al-Gebraic",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/db/Algebraic.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Aladdin (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "150",
+    "name": "Al",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/e1/Profile_-_Al.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Can You Teach My Alligator Manners?"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "151",
+    "name": "Al Muddy",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/1e/Md082.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Aladdin (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "158",
+    "name": "Alan-A-Dale",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/33/Alan_A_Dale.jpg",
+    "films": [
+      "Robin Hood (film)"
+    ],
+    "shortFilms": [
+      "Once Upon a Studio"
+    ],
+    "tvShows": [
+      "House of Mouse",
+      "The Wonderful World of Mickey Mouse"
+    ],
+    "videoGames": [
+      "Disney Magic Kingdoms",
+      "Disney Solitaire"
+    ],
+    "parkAttractions": [
+      "Garden of the Twelve Friends"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "169",
+    "name": "Alex Morrow",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/0f/The_Mighty_Ducks_Game_Changers_-_Alex_Morrow.jpeg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Mighty Ducks: Game Changers"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "190",
+    "name": "Lorraine Almaden",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/5f/Lorraine_Almaden.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Fillmore!"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "193",
+    "name": "Alonzo",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/53/Alonzo_in_102_Dalmatians.jpg",
+    "films": [
+      "101 Dalmatians",
+      "102 Dalmatians"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "199",
+    "name": "Amara",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/59/Amara.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Elena of Avalor"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "220",
+    "name": "Anansi",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/f1/Anansi.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Gargoyles"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "248",
+    "name": "Angelica",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/22/AngelicaProfile.jpg",
+    "films": [
+      "Pirates of the Caribbean: On Stranger Tides"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [
+      "LEGO Pirates of the Caribbean: The Video Game",
+      "Disney Universe",
+      "Disney Crossy Road"
+    ],
+    "parkAttractions": [
+      "World of Color",
+      "Mickey's Boo-to-You Halloween Parade"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "252",
+    "name": "Angler",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d4/Angler.jpeg",
+    "films": [
+      "Pirates of the Caribbean: Dead Man's Chest",
+      "Pirates of the Caribbean: At World's End"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [
+      "Pirates of the Caribbean: At World's End (video game)",
+      "LEGO Pirates of the Caribbean: The Video Game"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "276",
+    "name": "Antonio Agama",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/bb/The_Gecko%27s_Tale_9.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Elena of Avalor"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "319",
+    "name": "Armstrong",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/bc/ArmVacuum.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "DuckTales",
+      "DuckTales (2017 series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "343",
+    "name": "Asteroth",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/5f/Asteroth.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Mighty Ducks (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "381",
+    "name": "Avión",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/94/Avi%C3%B3n.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Elena of Avalor"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "385",
+    "name": "Dr. Axoloti",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/bc/Talespin_-_154_-_bullethead_baloo_Video_-_Rediff_Videos2.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "TaleSpin"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "390",
+    "name": "Azurine",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/17/Azurine.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Sofia the First"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "417",
+    "name": "Babyfier",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/fd/Profile_-_Babyfier.png",
+    "films": [
+      "Leroy & Stitch"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Lilo & Stitch: The Series",
+      "Stitch!"
+    ],
+    "videoGames": [
+      "Meteos: Disney Magic",
+      "Disney Tsum Tsum (game)"
+    ],
+    "parkAttractions": [
+      "Stitch's Great Escape!"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "427",
+    "name": "Big Bad",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/31/Big_Bad.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Goldie & Bear"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "452",
+    "name": "Balthazar Cavendish",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/b5/CavendishFull.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Milo Murphy's Law"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "483",
+    "name": "Steven Barkin",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/c1/Grande_Size_Me_%282%29.jpg",
+    "films": [
+      "Kim Possible (film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Kim Possible"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "486",
+    "name": "Barnaby",
+    "image": "https://static.wikia.nocookie.net/disney/images/7/79/Barnaby_Babes_in_Toyland.jpg",
+    "films": [
+      "Babes in Toyland"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "513",
+    "name": "Bastion",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/89/Bastion_Profile.png",
+    "films": [
+      "Tangled"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "523",
+    "name": "Booker Carter",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/1f/Raven%27s_Home_-_Season_5_-_Booker_Baxter-Carter.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Raven's Home",
+      "Bunk'd",
+      "Saturdays"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "526",
+    "name": "Baylene",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/a3/Baylene_2.jpg",
+    "films": [
+      "Dinosaur"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [
+      "Disney's Dinosaur",
+      "Dinosaur Activity Center"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "536",
+    "name": "Ma Beagle",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/08/320px-MaBeagle.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "DuckTales",
+      "DuckTales (2017 series)"
+    ],
+    "videoGames": [
+      "DuckTales: Scrooge's Loot",
+      "Disney Crossy Road"
+    ],
+    "parkAttractions": [
+      "DuckTales World Showcase Adventure"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "537",
+    "name": "Zeke Beakerman",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/ca/Zekesq.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Wizards of Waverly Place"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "538",
+    "name": "Candace Beakman",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6f/Captain-Beakman-profile.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "T.O.T.S."
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "553",
+    "name": "Jonah Beck",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/67/Andi_Mack_-_Season_3_-_Jonah_Beck.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Andi Mack"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "557",
+    "name": "Becky Thatcher",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d3/740full-tom-and-huck-screenshot.jpg",
+    "films": [
+      "Tom and Huck"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Tom Sawyer Island"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "573",
+    "name": "Belle",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/16/Profile_-_Belle.png",
+    "films": [
+      "Leroy & Stitch"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Lilo & Stitch: The Series"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "130",
+    "name": "Aerosol",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/af/Aerosol.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Pair of Kings"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "131",
+    "name": "Agatha",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/40/J119.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Jessie (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "136",
+    "name": "Unknown",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/b2/Agent-%28Bolt%29.jpg",
+    "films": [
+      "Bolt (film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "160",
+    "name": "Albert Awol",
+    "image": "https://static.wikia.nocookie.net/disney/images/7/7c/Noimage.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Jungle Cruise",
+      "Skipper Canteen"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "167",
+    "name": "Alex",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/aa/Alex_merman.jpg",
+    "films": [
+      "The Little Mermaid II: Return to the Sea"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "171",
+    "name": "Alexander and Terry",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/66/Alexander_and_Terry.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Big City Greens"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "173",
+    "name": "Ali",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/da/Ali.jpg",
+    "films": [
+      "Beverly Hills Chihuahua 2",
+      "Beverly Hills Chihuahua 3: Viva la Fiesta"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "185",
+    "name": "Allie Henderson",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/48/Alliehomeforxmas.jpg",
+    "films": [
+      "I'll Be Home for Christmas"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "208",
+    "name": "Queen Amena, Sparkly Queen of the World",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/1d/Queen_Amena.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Doc McStuffins"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "232",
+    "name": "Roxanne Andrews",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/85/Roxanne_Andrews.jpg",
+    "films": [
+      "Let It Shine"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "233",
+    "name": "Andromeda",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/ab/Andromeda.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Hercules: The Animated Series"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "244",
+    "name": "Angel Donald",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/f5/Donaldsangel.jpg",
+    "films": [
+      "Flubber"
+    ],
+    "shortFilms": [
+      "Donald's Better Self",
+      "Donald's Decision"
+    ],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "261",
+    "name": "Anne Boonchuy",
+    "image": "https://static.wikia.nocookie.net/disney/images/1/18/Profile_-_Anne_Boonchuy.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Amphibia",
+      "Broken Karaoke",
+      "Chibi Tiny Tales",
+      "Chibiverse",
+      "Theme Song Takeover"
+    ],
+    "videoGames": [
+      "Disney All-Star Racers",
+      "Disney Heroes: Battle Mode"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "288",
+    "name": "Appoline",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/0d/Appoline.jpg",
+    "films": [
+      "Beverly Hills Chihuahua 2"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "323",
+    "name": "Artemis",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/80/ARTEMIS12.jpg",
+    "films": [
+      "Hercules (film)"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Hercules (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "340",
+    "name": "The Ashleys",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/ea/The_ashleys.jpg",
+    "films": [
+      "Recess: School's Out",
+      "Recess: Taking the Fifth Grade",
+      "Recess: All Growed Down"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Recess"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "436",
+    "name": "Baker",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/96/BakerITW.jpg",
+    "films": [
+      "Into the Woods"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "451",
+    "name": "Balsam",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/54/Balsam.jpg",
+    "films": [],
+    "shortFilms": [
+      "Morris, the Midget Moose"
+    ],
+    "tvShows": [
+      "Walt Disney anthology series"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "484",
+    "name": "Barko",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/87/Barko_disney.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "489",
+    "name": "The Baron",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/b0/Baron_Tangled.jpeg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Tangled: The Series"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "541",
+    "name": "Bear",
+    "image": "https://static.wikia.nocookie.net/disney/images/3/31/Unnamedbear.jpg",
+    "films": [
+      "A Goofy Movie"
+    ],
+    "shortFilms": [
+      "The Bears and Bees",
+      "Little Hiawatha",
+      "Good Scouts",
+      "The Pointer",
+      "Donald's Vacation",
+      "Dumbell of the Yukon",
+      "Primitive Pluto"
+    ],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "542",
+    "name": "Herbert P. Bear, Esquire",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/80/HerbertPBear.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "We Wish You a Merry Walrus",
+      "Club Penguin: Monster Beach Party"
+    ],
+    "videoGames": [
+      "Club Penguin",
+      "Club Penguin: Elite Penguin Force: Herbert's Revenge",
+      "w:c:clubpenguin:Club Penguin Island"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "570",
+    "name": "Bella the Ballerina",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/82/Bella_the_Ballerina2.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Doc McStuffins",
+      "The Doc Files"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "14",
+    "name": "A.J. Arno",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/2c/A.J._Arno.jpg",
+    "films": [
+      "The Computer Wore Tennis Shoes",
+      "Now You See Him, Now You Don't",
+      "The Strongest Man in the World"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "15",
+    "name": "A.R.F.",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/ba/A.R.F.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Puppy Dog Pals"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "42",
+    "name": "Adelbert",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/fb/Profile-_Adelbert.jpeg",
+    "films": [
+      "Mickey's Good Deed"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "144",
+    "name": "Ajax the Gorilla",
+    "image": "https://static.wikia.nocookie.net/disney/images/8/81/Pepito_el_Gorila.jpg",
+    "films": [
+      "Mickey's House of Villains"
+    ],
+    "shortFilms": [
+      "Donald Duck and the Gorilla",
+      "Duck Pimples"
+    ],
+    "tvShows": [
+      "Mickey Mouse Works"
+    ],
+    "videoGames": [
+      "Deep Duck Trouble"
+    ],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "156",
+    "name": "Aladdin",
+    "image": "https://static.wikia.nocookie.net/disney/images/b/bb/Profile_-_Aladdin.png",
+    "films": [
+      "Aladdin (film)",
+      "The Return of Jafar",
+      "Aladdin and the King of Thieves",
+      "Mickey's Magical Christmas: Snowed in at the House of Mouse",
+      "Mickey's House of Villains",
+      "Once Upon a Halloween"
+    ],
+    "shortFilms": [
+      "Once Upon a Studio"
+    ],
+    "tvShows": [
+      "Aladdin (TV series)",
+      "Hercules (TV series)",
+      "House of Mouse",
+      "A Poem Is..."
+    ],
+    "videoGames": [
+      "Aladdin (video game)",
+      "Disney's Aladdin Chess Adventures",
+      "Aladdin Magic Carpet Racing",
+      "Disney's MathQuest With Aladdin",
+      "Disney's ReadingQuest With Aladdin",
+      "Disney's Aladdin in Nasira's Revenge",
+      "Kingdom Hearts (series)",
+      "Disney Move",
+      "Disney Universe",
+      "Kinect: Disneyland Adventures",
+      "Epic Mickey: Power of Illusion",
+      "Disney Magical World",
+      "Hidden Worlds",
+      "Disney Infinity (series)",
+      "Disney Villains Challenge",
+      "Disney Tsum Tsum (game)",
+      "Disney Crossy Road",
+      "Disney Emoji Blitz",
+      "Disney Magical Dice",
+      "Disney Magic Kingdoms",
+      "Disney Heroes: Battle Mode",
+      "Disney Getaway Blast",
+      "Disney Princess Majestic Quest",
+      "Disney Sorcerer's Arena",
+      "Disney Star Smash",
+      "Disney Wonderful Worlds",
+      "Disney Mirrorverse",
+      "Disney My Little Doll",
+      "w:c:justdance:Just Dance 2014",
+      "w:c:justdance:Just Dance Now",
+      "w:c:justdance:Just Dance Unlimited",
+      "w:c:justdance:Just Dance+",
+      "Disney Speedstorm",
+      "Disney Solitaire"
+    ],
+    "parkAttractions": [
+      "Mickey's PhilharMagic",
+      "Mickey's Soundsational Parade",
+      "It's a Small World",
+      "It's a Small World Holiday",
+      "It's a Small World with Groot",
+      "World of Color",
+      "Fantasmic!",
+      "Disney's Fantillusion",
+      "Mickey's Boo-to-You Halloween Parade",
+      "Mickey's Once Upon a Christmastime Parade",
+      "Aladdin's Royal Caravan",
+      "A Christmas Fantasy Parade",
+      "Mickey and the Wondrous Book",
+      "Golden Fairytale Fanfare",
+      "Voyage to the Crystal Grotto",
+      "Happily Ever After (fireworks show)",
+      "Wishes",
+      "Remember... Dreams Come True",
+      "Main Street Electrical Parade",
+      "Happiness is Here Parade",
+      "Dreaming Up!",
+      "Sindbad's Storybook Voyage",
+      "Disney Harmony in Color! Parade"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "166",
+    "name": "Aletta",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/2b/Screen_Shot_2020-10-24_at_3.17.35_PM.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Soarin'"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "175",
+    "name": "Alice",
+    "image": "https://static.wikia.nocookie.net/disney/images/e/eb/Alice_%28Alice_Comedies%29.png",
+    "films": [
+      "Alice Comedies"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Alice Comedies"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "186",
+    "name": "Alligators",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/df/Fantasia-disneyscreencaps_com-8802.jpg",
+    "films": [
+      "Fantasia",
+      "Mickey's Twice Upon a Christmas"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "House of Mouse"
+    ],
+    "videoGames": [
+      "Fantasia (video game)",
+      "Disney Sports Football"
+    ],
+    "parkAttractions": [
+      "Flights of Fantasy Parade (Disneyland)",
+      "SpectroMagic",
+      "Dreaming Up!"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "187",
+    "name": "Allison",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d5/Allison_%28Hocus_Pocus%29.jpg",
+    "films": [
+      "Hocus Pocus",
+      "Hocus Pocus 2"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Chibi Tiny Tales"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "209",
+    "name": "Amicus Arcane",
+    "image": "https://static.wikia.nocookie.net/disney/images/7/77/Arcane.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "216",
+    "name": "Amphitrite",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/58/Amphitrite.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Hercules (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "231",
+    "name": "Andrew Jacoby",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/c6/Andrew_Jacoby.jpg",
+    "films": [
+      "The Princess Diaries 2: Royal Engagement"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "240",
+    "name": "Anga",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/c0/Profile_-_Anga.png",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Lion Guard"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "263",
+    "name": "Annie",
+    "image": "https://static.wikia.nocookie.net/disney/images/f/fa/Annie_-_Profile.png",
+    "films": [
+      "Little Einsteins: Our Huge Adventure",
+      "Rocket's Firebird Rescue"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Little Einsteins"
+    ],
+    "videoGames": [],
+    "parkAttractions": [
+      "Disney Junior - Live on Stage!",
+      "Disney's Hollywood Studios"
+    ],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "305",
+    "name": "Archimedes",
+    "image": "https://static.wikia.nocookie.net/disney/images/0/0a/Archimedes_%28The_Little_Mermaid%29_001.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "The Little Mermaid (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "315",
+    "name": "Ashley A.",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/ad/Ashley_Armbruster.gif",
+    "films": [
+      "Recess: School's Out",
+      "Recess: Taking the Fifth Grade",
+      "Recess: All Growed Down"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Recess"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "325",
+    "name": "Artemis Fowl II",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/9f/Artemis_Fowl_-_Photography_-_Artemis_Fowl.jpg",
+    "films": [
+      "Artemis Fowl"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "326",
+    "name": "Arthur",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/cb/Arthur_Virus.PNG",
+    "films": [
+      "Ralph Breaks the Internet"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "338",
+    "name": "Nigel Ashcroft",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/c8/Nigelashcroft.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "W.I.T.C.H. (TV series)"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "339",
+    "name": "Vivian Ashe",
+    "image": "https://static.wikia.nocookie.net/disney/images/c/cb/Vivian_Ashe_-_Beverly_Hills_Chihuahua.jpg",
+    "films": [
+      "Beverly Hills Chihuahua",
+      "Beverly Hills Chihuahua 2"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "352",
+    "name": "Athos",
+    "image": "https://static.wikia.nocookie.net/disney/images/6/6b/THREE_MUSKETEERS-612_copy.jpg",
+    "films": [
+      "The Three Musketeers"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Once upon a time"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "353",
+    "name": "Atka",
+    "image": "https://static.wikia.nocookie.net/disney/images/a/a1/Atka.jpg",
+    "films": [
+      "Brother Bear 2"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "356",
+    "name": "The Auctioneer",
+    "image": "https://static.wikia.nocookie.net/disney/images/9/93/The_Auctioneer4.jpg",
+    "films": [
+      "The Small One"
+    ],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "432",
+    "name": "Baileywick",
+    "image": "https://static.wikia.nocookie.net/disney/images/5/59/Baileywick09.jpg",
+    "films": [
+      "Sofia the First: Once Upon a Princess"
+    ],
+    "shortFilms": [],
+    "tvShows": [
+      "Sofia the First"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "473",
+    "name": "Banshee",
+    "image": "https://static.wikia.nocookie.net/disney/images/4/4b/Banshee_Gargoyles.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Gargoyles"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "482",
+    "name": "Franklin Barkin",
+    "image": "https://static.wikia.nocookie.net/disney/images/2/2a/Franklin_Barkin.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [
+      "Kim Possible"
+    ],
+    "videoGames": [],
+    "parkAttractions": [],
+    "allies": [],
+    "enemies": []
+  },
+  {
+    "id": "496",
+    "name": "Teddi Barra",
+    "image": "https://static.wikia.nocookie.net/disney/images/d/d5/Mk-cb-teddi.jpg",
+    "films": [],
+    "shortFilms": [],
+    "tvShows": [],
+    "videoGames": [],
+    "parkAttractions": [
+      "Country Bear Jamboree",
+      "Country Bear Vacation Hoedown",
+      "Country Bear Christmas Special",
+      "Country Bear Musical Jamboree",
+      "Pooh Corner",
+      "Professor Barnaby Owl's Photographic Art Studio"
+    ],
+    "allies": [],
+    "enemies": []
+  }
+]

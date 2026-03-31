@@ -1,12 +1,11 @@
-import { doc, getDoc } from "firebase/firestore"; // ✅ GARDE : deck perso en Firestore
 import {
   ref,
   set,
   get,
   onValue,
   runTransaction,
-} from "firebase/database"; // ✅ MODIF : parties en Realtime DB
-import { db, rtdb } from "./firebaseConfig";
+} from "firebase/database"; // arties en Realtime DB
+import {rtdb } from "./firebaseConfig";
 import {
   createInitialPlayerState,
   declareAttack,
@@ -15,14 +14,6 @@ import {
 import { fetchDisneyCharacters } from "./disneyService";
 
 let allCardsCachePromise = null;
-
-async function getUserDeck(uid) {
-  const refDeck = doc(db, "users", uid, "deck", "main");
-  const snap = await getDoc(refDeck);
-  if (!snap.exists()) return [];
-  const data = snap.data();
-  return Array.isArray(data.cards) ? data.cards.map(String) : [];
-}
 
 function toCombatCard(card) {
   const cardId = String(card.id);
@@ -118,64 +109,67 @@ export async function joinGame(gameId, guestUser) {
 // ✅ AJOUT : quand un joueur valide son deck sur DeckPage
 export async function lockDeckForGame(gameId, user, selectedDeckIds) {
   const gameRef = ref(rtdb, `games/${gameId}`);
+  const uid = user.uid;
 
-  const result = await runTransaction(gameRef, async (game) => {
-    if (!game) {
-      throw new Error("Partie introuvable");
-    }
+  const gameSnapshot = await get(gameRef);
+  if (!gameSnapshot.exists()) {
+    throw new Error("Partie introuvable");
+  }
 
-    const uid = user.uid;
-    const isPlayerA = game.playerAUser?.uid === uid;
-    const isPlayerB = game.playerBUser?.uid === uid;
+  const game = gameSnapshot.val();
+  const isPlayerA = game.playerAUser?.uid === uid;
+  const isPlayerB = game.playerBUser?.uid === uid;
 
-    if (!isPlayerA && !isPlayerB) {
-      throw new Error("Tu ne fais pas partie de cette partie");
-    }
+  if (!isPlayerA && !isPlayerB) {
+    throw new Error("Tu ne fais pas partie de cette partie");
+  }
 
-    // ✅ AJOUT : construit les vraies cartes de combat à partir du deck choisi
-    const combatDeckCards = await buildDeckCardsFromIds(
-      selectedDeckIds.map(String)
-    );
+  const combatDeckCards = await buildDeckCardsFromIds(
+    selectedDeckIds.map(String)
+  );
 
-    const playerState = createInitialPlayerState(
-      uid,
-      user.displayName || (isPlayerA ? "Joueur 1" : "Joueur 2"),
-      combatDeckCards
-    );
+  const playerState = createInitialPlayerState(
+    uid,
+    user.displayName || (isPlayerA ? "Joueur 1" : "Joueur 2"),
+    combatDeckCards
+  );
+
+  const result = await runTransaction(gameRef, (currentGame) => {
+    if (!currentGame) return currentGame;
 
     const updatedGame = {
-      ...game,
+      ...currentGame,
       updatedAt: Date.now(),
     };
 
     if (isPlayerA) {
-      updatedGame.playerA = playerState; // ✅ AJOUT
+      updatedGame.playerA = playerState;
       updatedGame.playerAUser = {
-        ...game.playerAUser,
-        deckReady: true, // ✅ AJOUT
+        ...currentGame.playerAUser,
+        deckReady: true,
       };
     }
 
     if (isPlayerB) {
-      updatedGame.playerB = playerState; // ✅ AJOUT
+      updatedGame.playerB = playerState;
       updatedGame.playerBUser = {
-        ...game.playerBUser,
-        deckReady: true, // ✅ AJOUT
+        ...currentGame.playerBUser,
+        deckReady: true,
       };
     }
 
-    // ✅ AJOUT : si les 2 decks sont prêts, on démarre la partie
     const aReady =
-      (isPlayerA ? true : game.playerAUser?.deckReady) && !!updatedGame.playerA;
+      !!updatedGame.playerA && !!updatedGame.playerAUser?.deckReady;
     const bReady =
-      (isPlayerB ? true : game.playerBUser?.deckReady) && !!updatedGame.playerB;
+      !!updatedGame.playerB && !!updatedGame.playerBUser?.deckReady;
 
     if (aReady && bReady) {
-      updatedGame.status = "playing"; // ✅ AJOUT
-      updatedGame.phase = "attack"; // ✅ AJOUT
-      updatedGame.currentTurn = updatedGame.playerA.uid; // ✅ AJOUT : playerA commence
+      updatedGame.status = "playing";
+      updatedGame.phase = "attack";
+      updatedGame.currentTurn =
+        Math.random() < 0.5 ? updatedGame.playerA.uid : updatedGame.playerB.uid;
     } else {
-      updatedGame.status = "deck_selection"; // ✅ AJOUT
+      updatedGame.status = "deck_selection";
       updatedGame.phase = "setup";
     }
 
@@ -186,7 +180,6 @@ export async function lockDeckForGame(gameId, user, selectedDeckIds) {
     throw new Error("Impossible de verrouiller le deck");
   }
 }
-
 export function subscribeToGame(gameId, callback) {
   const gameRef = ref(rtdb, `games/${gameId}`);
 

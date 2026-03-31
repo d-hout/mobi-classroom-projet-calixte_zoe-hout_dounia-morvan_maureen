@@ -6,19 +6,23 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Header from "../components/Header";
 import Cartes from "../components/cartes";
-import { fetchDisneyCharacters } from "../services/disneyService";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
-import { db, auth } from "../services/firebaseConfig";
+import {
+  fetchLocalDisneyCharacters,
+  searchLocalDisneyCharacters,
+} from "../services/localDisneyService";
+import { auth } from "../services/firebaseConfig";
+import { getUserDeck, saveUserDeck } from "../services/deckService";
 import {
   getDisplayImageUrl,
-  getValidatedImageUrl,
   handleImageError,
 } from "../utils/imageUtils";
-import { useNavigate, useParams } from "react-router-dom"; // ✅ AJOUT
+import { useNavigate, useParams } from "react-router-dom"; 
 import {
   lockDeckForGame,
   subscribeToGame,
-} from "../services/gameService"; // ✅ AJOUT
+} from "../services/gameService"; 
+
+const USERS_COLLECTION = "utilisateurs";
 
 export default function DeckPage() {
   const [cards, setCards] = useState([]);
@@ -41,7 +45,7 @@ export default function DeckPage() {
     let mounted = true;
     setLoading(true);
 
-    fetchDisneyCharacters(page, pageSize)
+    fetchLocalDisneyCharacters(page, pageSize)
       .then((list) => {
         if (!mounted) return;
         setCards((prev) => {
@@ -50,22 +54,18 @@ export default function DeckPage() {
           return page === 1 ? list || [] : [...prev, ...toAdd];
         });
       })
-      .catch((err) => console.error("fetchDisneyCharacters", err))
+      .catch((err) => console.error("fetchLocalDisneyCharacters", err))
       .finally(() => mounted && setLoading(false));
 
     async function loadDeck() {
-      if (!uid) return;
-      try {
-        const ref = doc(db, "users", uid, "deck", "main");
-        const snap = await getDoc(ref);
-        if (snap.exists()) {
-          const data = snap.data();
-          if (Array.isArray(data.cards)) setSelected(data.cards.map(String));
-        }
-      } catch (err) {
-        console.error("loadDeck", err);
-      }
-    }
+  if (!uid) return;
+  try {
+    const cards = await getUserDeck(uid);
+    setSelected(cards);
+  } catch (err) {
+    console.warn("loadDeck ignoré :", err.message);
+  }
+}
 
     loadDeck();
 
@@ -93,47 +93,33 @@ export default function DeckPage() {
     setSelected((s) => s.filter((id) => id !== String(cardId))); // ✅ MODIF
 
   const handleSave = async () => {
-    if (!uid) return alert("Connecte-toi d'abord.");
-    if (!gameId) return alert("Aucune partie sélectionnée."); // ✅ AJOUT
-    if (selected.length !== 10) {
-      return alert("Le deck doit contenir exactement 10 cartes.");
-    }
+  if (!uid) return alert("Connecte-toi d'abord.");
+  if (!gameId) return alert("Aucune partie sélectionnée.");
+  if (selected.length !== 10) {
+    return alert("Le deck doit contenir exactement 10 cartes.");
+  }
 
-    try {
-      setSaving(true); // ✅ AJOUT
+  try {
+    setSaving(true);
 
-      const userDeckRef = doc(db, "users", uid, "deck", "main");
+    await saveUserDeck(uid, selected);
+    await lockDeckForGame(gameId, auth.currentUser, selected);
 
-      await setDoc(
-        userDeckRef,
-        {
-          cards: selected,
-          updatedAt: serverTimestamp(),
-        },
-        { merge: true }
-      );
-
-      // ✅ AJOUT : verrouille le deck pour cette partie
-      await lockDeckForGame(gameId, auth.currentUser, selected);
-      alert("Deck sauvegardé pour la partie.");
-      navigate(`/game/${gameId}`);
-      // ✅ MODIF :
-      // on ne force pas navigate("/game/...") ici directement,
-      // parce qu'on attend que la partie passe en status = "playing"
-      // grâce au subscribeToGame.
-    } catch (err) {
-      console.error("save deck", err);
-      alert(err.message || "Erreur lors de la sauvegarde.");
-    } finally {
-      setSaving(false); // ✅ AJOUT
-    }
-  };
+    alert("Deck sauvegardé pour la partie.");
+    navigate(`/game/${gameId}`);
+  } catch (err) {
+    console.error("save deck", err);
+    alert(err.message || "Erreur lors de la sauvegarde.");
+  } finally {
+    setSaving(false);
+  }
+};
 
   const loadMore = () => setPage((p) => p + 1);
 
   const onSearch = async () => {
     const term = query.trim();
-
+    
     if (!term) {
       setPage(1);
       setCards([]);
@@ -145,15 +131,8 @@ export default function DeckPage() {
     setLoading(true);
 
     try {
-      const found = await findByName(term, pageSize);
-      const normalizedCards = await Promise.all(
-        found.map(async (c) => ({
-          id: c._id ?? c.id,
-          name: c.name,
-          image: await getValidatedImageUrl(c.imageUrl || c.image),
-        }))
-      );
-      setCards(normalizedCards);
+      const found = await searchLocalDisneyCharacters(term);
+      setCards(found);
     } catch (err) {
       console.error("search error", err);
       setCards([]);
@@ -338,30 +317,4 @@ export default function DeckPage() {
       </div>
     </>
   );
-}
-
-async function findByName(term, pageSize = 50) {
-  const allFound = [];
-  let p = 1;
-
-  while (true) {
-    const res = await fetch(
-      `https://api.disneyapi.dev/character?page=${p}&pageSize=${pageSize}`
-    );
-    if (!res.ok) break;
-
-    const json = await res.json();
-
-    const matches = (json.data || []).filter(
-      (c) => c.name && c.name.toLowerCase().includes(term.toLowerCase())
-    );
-
-    if (matches.length) allFound.push(...matches);
-    if (!json.info || (json.data || []).length < pageSize) break;
-
-    p++;
-    if (p > 10) break;
-  }
-
-  return allFound;
 }

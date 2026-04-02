@@ -1,154 +1,177 @@
-// Moteur du jeu: il prend un état e partie en entrée puis retourne un nouvel état mise à jour 
+// Moteur du jeu: il prend un état e partie en entrée puis retourne un nouvel état mise à jour
 
 // Mélange les cartes du deck
-// Si on a c1,c2,c3,c4 ça ressort c3,c1,c4,c2 par exemple
 function shuffle(array) {
   return [...array].sort(() => Math.random() - 0.5);
 }
 
-// Remplir le terrain d'un jour jusqu'à 3 cartes maximum 
-// Si après un combat il n’en reste que 1 ou 2, il pioche dans son deck pour remonter à 3
+// Remplir le terrain d'un joueur jusqu'à 3 cartes maximum
 function drawToBoard(player) {
-  const board = [...player.board];
-  const deck = [...player.deck];
+  const board = [...(player.board || [])];
+  const deck = [...(player.deck || [])];
 
   while (board.length < 3 && deck.length > 0) {
-    board.push(deck.shift());// on prend la 1ère carte du deck avec shift() et on l'ajoute au terrain avec push. 
+    board.push(deck.shift());
   }
 
   return { ...player, board, deck };
 }
-// Comme pour la fonction shuffle on copie via [...] pour ne pas modifier l'objet initial
 
 // Etat initial d'un joueur en début de partie
 export function createInitialPlayerState(uid, name, deckCards) {
-  const deck = shuffle(deckCards); // on mélange les 10 cartes du joueur
-  const board = deck.splice(0, 3); // on prend les 3 premières cartes du deck mélangé pour les afficher sur le terrain, ces cartes=board, les autres=deck 
+  const deck = shuffle(deckCards || []);
+  const board = deck.splice(0, 3);
 
   return {
     uid,
     name,
-    hp: 5, //points de vie
+    hp: 5,
     deck,
     hand: [],
     board,
-    discard: [], // cartes défaussées
+    discard: [],
   };
 }
 
 // Remplir le terrain d'un joueur dans l'objet global game
-/* playerKey= playerA ou playerB 
-si playerKey === 'playerA', on modifie game.playerA
-si playerKey === 'playerB', on modifie game.playerB
-*/
 export function refillBoard(game, playerKey) {
+  if (!game || !game[playerKey]) return game;
   return {
     ...game,
     [playerKey]: drawToBoard(game[playerKey]),
   };
 }
 
-// Déclarer une attaque
+// Déclarer une attaque (avec validations)
 export function declareAttack(game, attackerPlayerKey, attackerCardId) {
-  const attacker = game[attackerPlayerKey]; //récupération du joueur attaquant
-  const attackedPlayerKey = attackerPlayerKey === 'playerA' ? 'playerB' : 'playerA';
+  if (!game) throw new Error("Partie invalide");
+  if (game.phase !== "attack")
+    throw new Error("Impossible d'attaquer hors phase d'attaque");
+  if (!game.pendingAttack) {
+    // ok
+  } else {
+    // s'il existe déjà une attaque en attente, bloquer
+    throw new Error("Une attaque est déjà en attente");
+  }
 
-  // On détermine automatiquement le défenseur
-  const card = attacker.board.find((c) => c.id === attackerCardId);
-  // On cherche sur le terrain du joueur la carte choisie pour attaquer 
-  if (!card) throw new Error('Carte attaquante introuvable');
+  const attacker = game[attackerPlayerKey];
+  if (!attacker) throw new Error("Attaquant introuvable");
+  if (game.currentTurn !== attacker.uid)
+    throw new Error("Ce n'est pas le tour de l'attaquant");
+
+  const card = (attacker.board || []).find(
+    (c) => String(c.id) === String(attackerCardId),
+  );
+  if (!card) throw new Error("Carte attaquante introuvable");
 
   return {
     ...game,
-    phase: 'defense',
+    phase: "defense",
     pendingAttack: {
-      attackerPlayerKey, // ex: 'playerA'
-      defenderPlayerKey: attackedPlayerKey, // ex: 'playerB'
-      attackerCard: card, // ex: {id:'c7', atk:8, def:3}
-    }, // on enregistre ue attaque "en attente"
+      attackerPlayerKey,
+      defenderPlayerKey:
+        attackerPlayerKey === "playerA" ? "playerB" : "playerA",
+      attackerCard: card,
+    },
   };
 }
 
+// Résoudre la défense (avec validations)
 export function resolveDefense(game, defenderCardId = null) {
-  // On récupère les infos de l'attaque en attente: qui attaque, qui défend, quelle carte attaque
-  const { attackerPlayerKey, defenderPlayerKey, attackerCard } = game.pendingAttack;
+  if (!game || !game.pendingAttack)
+    throw new Error("Aucune attaque en attente");
 
-  const attacker = { ...game[attackerPlayerKey] }; 
-  const defender = { ...game[defenderPlayerKey] }; 
+  const { attackerPlayerKey, defenderPlayerKey, attackerCard } =
+    game.pendingAttack;
+  if (!attackerPlayerKey || !defenderPlayerKey || !attackerCard)
+    throw new Error("Attaque en attente invalide");
 
-  if (!defenderCardId) { // si defendarCardId vaut null alors le défenseur choisit de prendre le coup directement --> il perd 1PV et l'attaque en attente est supprimée, on repasse à l aphase "attack"
-    defender.hp -= 1;
+  const attacker = { ...(game[attackerPlayerKey] || {}) };
+  const defender = { ...(game[defenderPlayerKey] || {}) };
+
+  if (!attacker || !defender) throw new Error("Joueurs non initialisés");
+
+  // Défense directe (prendre le coup)
+  if (!defenderCardId) {
+    defender.hp = Math.max(0, (defender.hp || 0) - 1);
     return endTurn({
       ...game,
       [defenderPlayerKey]: defender,
-      phase: 'attack',
+      phase: "attack",
       pendingAttack: null,
     });
   }
 
-  // le défenseur joue une carte
-  const defenderCard = defender.board.find((c) => c.id === defenderCardId);
-  if (!defenderCard) throw new Error('Carte défense introuvable');
+  const defenderCard = (defender.board || []).find(
+    (c) => String(c.id) === String(defenderCardId),
+  );
+  if (!defenderCard) throw new Error("Carte défense introuvable");
 
-  // retirer les cartes du terrain grâce à filter() qui gardent tous sauf celles qu'on veut enlever
-  attacker.board = attacker.board.filter((c) => c.id !== attackerCard.id);
-  defender.board = defender.board.filter((c) => c.id !== defenderCard.id);
+  // Retirer les cartes du terrain
+  attacker.board = (attacker.board || []).filter(
+    (c) => String(c.id) !== String(attackerCard.id),
+  );
+  defender.board = (defender.board || []).filter(
+    (c) => String(c.id) !== String(defenderCard.id),
+  );
 
-  // On envoie ces cartes dans la défausse
-  attacker.discard = [...attacker.discard, attackerCard];
-  defender.discard = [...defender.discard, defenderCard];
+  // Envoyer en défausse
+  attacker.discard = [...(attacker.discard || []), attackerCard];
+  defender.discard = [...(defender.discard || []), defenderCard];
 
-  // Comparer l'attaque et la défense
-  if (attackerCard.atk > defenderCard.def) {
-    defender.hp -= 1; // le défenseur perd 1PV si l'attaque est sup à la défense
+  // Comparer ATK / DEF
+  if ((attackerCard.atk || 0) > (defenderCard.def || 0)) {
+    defender.hp = Math.max(0, (defender.hp || 0) - 1);
   }
 
-  // Fin de résolution: on met à jour le state du jeu 
-  /* les joueurs ont leur nouveaux board, discard et hp avec leurs PV */
   return endTurn({
     ...game,
     [attackerPlayerKey]: attacker,
     [defenderPlayerKey]: defender,
-    phase: 'attack',
+    phase: "attack",
     pendingAttack: null,
   });
 }
 
 // Terminer le tour actuel et préparer le tour suivant
 export function endTurn(game) {
-  const nextTurn = game.currentTurn === game.playerA.uid ? game.playerB.uid : game.playerA.uid;
-  // si c'était au tour de playerA alors le prochain tour est à playerB et inversement
+  if (!game || !game.playerA || !game.playerB) return game;
+
+  const aUid = game.playerA.uid;
+  const bUid = game.playerB.uid;
+  if (!aUid || !bUid) return game;
+
+  const nextTurn = game.currentTurn === aUid ? bUid : aUid;
 
   const updated = {
     ...game,
     currentTurn: nextTurn,
-  }; // met à jour currentTurn
+  };
 
-  // Remplir le terrain du prochain joueur 
-  const nextKey = updated.playerA.uid === nextTurn ? 'playerA' : 'playerB';
+  const nextKey = updated.playerA.uid === nextTurn ? "playerA" : "playerB";
   const refilled = refillBoard(updated, nextKey);
- //on identifie si le prochain joueur est playerA ou playerB puis on remplit son terrain jusqu'à 3 cartes.
-  return computeWinner(refilled); // après avoir fini le tour, on vérifie si quelqu'un a gagné
+
+  return computeWinner(refilled);
 }
 
 // Déterminer si la partie est terminée
 export function computeWinner(game) {
-  // le playerA n'a plus dePV
-  if (game.playerA.hp <= 0) {
-    return { ...game, status: 'finished', winner: game.playerB.uid };
+  if (!game || !game.playerA || !game.playerB) return game;
+
+  if ((game.playerA.hp || 0) <= 0) {
+    return { ...game, status: "finished", winner: game.playerB.uid };
   }
 
-  // playerB n'a plus de PV
-  if (game.playerB.hp <= 0) {
-    return { ...game, status: 'finished', winner: game.playerA.uid };
+  if ((game.playerB.hp || 0) <= 0) {
+    return { ...game, status: "finished", winner: game.playerA.uid };
   }
 
-  // Plus de cartes chez les deux joueurs à la fois dans le deck et sur le terrain
-  const aEmpty = game.playerA.deck.length === 0 && game.playerA.board.length === 0;
-  const bEmpty = game.playerB.deck.length === 0 && game.playerB.board.length === 0;
+  // Conformément au PDF : match nul si les deux joueurs n'ont plus de cartes sur le terrain
+  const aBoardEmpty = (game.playerA.board || []).length === 0;
+  const bBoardEmpty = (game.playerB.board || []).length === 0;
 
-  if (aEmpty && bEmpty) {
-    return { ...game, status: 'finished', winner: 'draw' };
+  if (aBoardEmpty && bBoardEmpty) {
+    return { ...game, status: "finished", winner: "draw" };
   }
 
   return game;

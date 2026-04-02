@@ -8,6 +8,7 @@ import { createGame, joinGame } from "../services/gameService"; // ✅ AJOUT
 
 export default function HomePage() {
   const navigate = useNavigate();
+  
 
   const handleCreateGame = async () => {
     try {
@@ -61,7 +62,7 @@ export default function HomePage() {
           <Button
             className="bouton-blue"
             variant="contained"
-            onClick={handleCreateGame} // ✅ MODIF
+            onClick={handleCreateGame}
           >
             Nouvelle partie
           </Button>
@@ -69,7 +70,7 @@ export default function HomePage() {
           <Button
             className="bouton-blue"
             variant="contained"
-            onClick={handleJoinGame} // ✅ MODIF
+            onClick={handleJoinGame}
           >
             Rejoindre partie
           </Button>

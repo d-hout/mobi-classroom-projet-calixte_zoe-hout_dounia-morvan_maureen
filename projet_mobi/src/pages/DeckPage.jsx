@@ -12,15 +12,9 @@ import {
 } from "../services/localDisneyService";
 import { auth } from "../services/firebaseConfig";
 import { getUserDeck, saveUserDeck } from "../services/deckService";
-import {
-  getDisplayImageUrl,
-  handleImageError,
-} from "../utils/imageUtils";
-import { useNavigate, useParams } from "react-router-dom"; 
-import {
-  lockDeckForGame,
-  subscribeToGame,
-} from "../services/gameService"; 
+import { getDisplayImageUrl, handleImageError } from "../utils/imageUtils";
+import { useNavigate, useParams } from "react-router-dom";
+import { lockDeckForGame, subscribeToGame } from "../services/gameService";
 
 const USERS_COLLECTION = "utilisateurs";
 
@@ -36,7 +30,7 @@ export default function DeckPage() {
   const pageSize = 48;
   const uid = auth?.currentUser?.uid;
 
-  const navigate = useNavigate(); // ✅ AJOUT
+  const navigate = useNavigate(); // ✅ correct : navigate est défini ici
   const { gameId } = useParams(); // ✅ AJOUT
 
   useEffect(() => {
@@ -58,14 +52,14 @@ export default function DeckPage() {
       .finally(() => mounted && setLoading(false));
 
     async function loadDeck() {
-  if (!uid) return;
-  try {
-    const cards = await getUserDeck(uid);
-    setSelected(cards);
-  } catch (err) {
-    console.warn("loadDeck ignoré :", err.message);
-  }
-}
+      if (!uid) return;
+      try {
+        const cards = await getUserDeck(uid);
+        setSelected(cards);
+      } catch (err) {
+        console.warn("loadDeck ignoré :", err.message);
+      }
+    }
 
     loadDeck();
 
@@ -93,33 +87,33 @@ export default function DeckPage() {
     setSelected((s) => s.filter((id) => id !== String(cardId))); // ✅ MODIF
 
   const handleSave = async () => {
-  if (!uid) return alert("Connecte-toi d'abord.");
-  if (!gameId) return alert("Aucune partie sélectionnée.");
-  if (selected.length !== 10) {
-    return alert("Le deck doit contenir exactement 10 cartes.");
-  }
+    if (!uid) return alert("Connecte-toi d'abord.");
+    if (!gameId) return alert("Aucune partie sélectionnée.");
+    if (selected.length !== 10) {
+      return alert("Le deck doit contenir exactement 10 cartes.");
+    }
 
-  try {
-    setSaving(true);
+    try {
+      setSaving(true);
 
-    await saveUserDeck(uid, selected);
-    await lockDeckForGame(gameId, auth.currentUser, selected);
+      await saveUserDeck(uid, selected);
+      await lockDeckForGame(gameId, auth.currentUser, selected);
 
-    alert("Deck sauvegardé pour la partie.");
-    navigate(`/game/${gameId}`);
-  } catch (err) {
-    console.error("save deck", err);
-    alert(err.message || "Erreur lors de la sauvegarde.");
-  } finally {
-    setSaving(false);
-  }
-};
+      alert("Deck sauvegardé pour la partie.");
+      navigate(`/game/${gameId}`);
+    } catch (err) {
+      console.error("save deck", err);
+      alert(err.message || "Erreur lors de la sauvegarde.");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const loadMore = () => setPage((p) => p + 1);
 
   const onSearch = async () => {
     const term = query.trim();
-    
+
     if (!term) {
       setPage(1);
       setCards([]);
@@ -147,15 +141,15 @@ export default function DeckPage() {
     game?.playerAUser?.uid === uid
       ? game?.playerAUser?.deckReady
       : game?.playerBUser?.uid === uid
-      ? game?.playerBUser?.deckReady
-      : false;
+        ? game?.playerBUser?.deckReady
+        : false;
 
   const opponentReady =
     game?.playerAUser?.uid === uid
       ? game?.playerBUser?.deckReady
       : game?.playerBUser?.uid === uid
-      ? game?.playerAUser?.deckReady
-      : false;
+        ? game?.playerAUser?.deckReady
+        : false;
 
   return (
     <>
@@ -172,9 +166,28 @@ export default function DeckPage() {
       {/* ✅ AJOUT : petit état du lobby */}
       {gameId && (
         <div style={{ marginLeft: "10px", marginBottom: "16px" }}>
-          <p>ID de la partie : {gameId}</p>
-          <p>Mon deck prêt : {myReady ? "Oui" : "Non"}</p>
-          <p>Deck adverse prêt : {opponentReady ? "Oui" : "Non"}</p>
+          <p>
+            ID de la partie : <strong>{gameId}</strong>
+          </p>
+
+          {/* Affichage explicite des joueurs pour éviter la confusion */}
+          <div style={{ display: "flex", gap: 24, marginTop: 8 }}>
+            <div>
+              <div style={{ fontWeight: 600 }}>
+                {game?.playerAUser?.name || "Joueur A"}{" "}
+                {game?.playerAUser?.uid === uid ? "(Moi)" : ""}
+              </div>
+              <div>Prêt : {game?.playerAUser?.deckReady ? "Oui" : "Non"}</div>
+            </div>
+
+            <div>
+              <div style={{ fontWeight: 600 }}>
+                {game?.playerBUser?.name || "Joueur B"}{" "}
+                {game?.playerBUser?.uid === uid ? "(Moi)" : ""}
+              </div>
+              <div>Prêt : {game?.playerBUser?.deckReady ? "Oui" : "Non"}</div>
+            </div>
+          </div>
         </div>
       )}
 

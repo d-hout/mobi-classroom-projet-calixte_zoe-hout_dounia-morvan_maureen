@@ -1,11 +1,5 @@
-import {
-  ref,
-  set,
-  get,
-  onValue,
-  runTransaction,
-} from "firebase/database"; // arties en Realtime DB
-import {rtdb } from "./firebaseConfig";
+import { ref, set, get, onValue, runTransaction } from "firebase/database"; // arties en Realtime DB
+import { rtdb } from "./firebaseConfig";
 import {
   createInitialPlayerState,
   declareAttack,
@@ -35,8 +29,8 @@ async function getAllCards() {
     allCardsCachePromise = (async () => {
       const pages = await Promise.all(
         Array.from({ length: 6 }, (_, index) =>
-          fetchDisneyCharacters(index + 1, 50)
-        )
+          fetchDisneyCharacters(index + 1, 50),
+        ),
       );
       return pages.flat().map(toCombatCard);
     })();
@@ -52,9 +46,9 @@ async function buildDeckCardsFromIds(deckIds) {
 
 // ✅ MODIF : crée une partie vide
 export async function createGame(hostUser) {
-  const gameId = crypto.randomUUID(); // ✅ AJOUT : id de partie
+  const gameId = crypto.randomUUID();
   const gameRef = ref(rtdb, `games/${gameId}`);
-
+  console.log("[createGame] creating gameId=", gameId, "user=", hostUser?.uid);
   await set(gameRef, {
     status: "deck_selection", // ✅ MODIF : la partie commence en sélection de deck
     createdBy: hostUser.uid,
@@ -71,38 +65,135 @@ export async function createGame(hostUser) {
     pendingAttack: null,
     winner: null,
     createdAt: Date.now(),
-    updatedAt: Date.now(),
   });
-
+  console.log("[createGame] created OK:", gameId);
   return gameId;
 }
 
 // ✅ MODIF : rejoint une partie sans encore initialiser le deck combat
 export async function joinGame(gameId, guestUser) {
-  const gameRef = ref(rtdb, `games/${gameId}`);
+  console.log(
+    "[gameService] joinGame called with id:",
+    JSON.stringify(gameId),
+    "guest:",
+    guestUser?.uid,
+  );
 
-  const result = await runTransaction(gameRef, (game) => {
-    if (!game) {
-      throw new Error("Partie introuvable");
+  // Tolérance sur l'ID fourni : on accepte l'UUID pur, une URL complète ou un chemin
+  const raw = String(gameId || "").trim();
+  const extractGameId = (input) => {
+    if (!input) return null;
+    // Retirer les paramètres d'URL éventuels
+    const cleaned = input.split(/[?#]/)[0];
+    // Si l'utilisateur a collé une URL complète, récupérer le dernier segment
+    try {
+      // si c'est une URL, new URL(cleaned) fonctionne; sinon on continue
+      const maybeUrl = new URL(cleaned);
+      const p = maybeUrl.pathname.split("/").filter(Boolean);
+      if (p.length) return p[p.length - 1];
+    } catch (e) {
+      // non une URL, continuer
     }
+    // Chercher un pattern UUID simple
+    const uuidMatch = cleaned.match(/[0-9a-fA-F\-]{8,36}/);
+    if (uuidMatch) return uuidMatch[0];
+    // Sinon prendre dernier segment après '/'
+    const parts = cleaned.split("/").filter(Boolean);
+    return parts.length ? parts[parts.length - 1] : cleaned;
+  };
 
-    if (game.playerBUser?.uid) {
-      throw new Error("La partie est déjà pleine");
+  const normalizedId = extractGameId(raw) || raw;
+  console.log(
+    `[gameService] joinGame using normalizedId='${normalizedId}' (raw='${raw}')`,
+  );
+  const gameRef = ref(rtdb, `games/${String(normalizedId).trim()}`);
+
+  // pré‑check
+  try {
+    const snap = await get(gameRef);
+    console.log(
+      "[gameService] pre-check snap.exists:",
+      snap.exists(),
+      "for id:",
+      normalizedId,
+    );
+    if (!snap.exists()) {
+      console.error(
+        "[gameService] joinGame: partie introuvable (pré-check) id=",
+        normalizedId,
+        "raw=",
+        raw,
+      );
+      throw new Error("Partie introuvable (vérifie l'ID saisi)");
     }
+  } catch (e) {
+    console.error("[gameService] joinGame pre-check failed:", e);
+    throw e;
+  }
 
-    return {
-      ...game,
-      playerBUser: {
-        uid: guestUser.uid,
-        name: guestUser.displayName || "Joueur 2",
-        deckReady: false, // ✅ AJOUT
-      },
-      updatedAt: Date.now(),
-    };
-  });
+  // log avant transaction
+  console.log(
+    "[gameService] runTransaction starting for",
+    gameRef._path?.toString?.() || gameId,
+  );
 
-  if (!result.committed) {
-    throw new Error("Impossible de rejoindre la partie");
+  try {
+    const result = await runTransaction(gameRef, (currentGame) => {
+      console.log(
+        "[gameService] transaction callback currentGame:",
+        currentGame ? "OK" : currentGame,
+      );
+      if (!currentGame) {
+        // currentGame null = transaction couldn't read the node (permissions/offline) or race
+        // retourne currentGame pour aborter proprement la transaction côté client;
+        // on analysera le résultat après runTransaction pour choisir le message d'erreur.
+        console.warn(
+          "[gameService] transaction read returned null — aborting updateFunction",
+        );
+        return currentGame;
+      }
+      if (currentGame.playerBUser?.uid) {
+        // déjà complet, on abort
+        console.warn("[gameService] transaction: partie déjà pleine");
+        return currentGame;
+      }
+
+      return {
+        ...currentGame,
+        playerBUser: {
+          uid: guestUser.uid,
+          name: guestUser.displayName || guestUser.email || "Joueur 2",
+          deckReady: false,
+        },
+        updatedAt: Date.now(),
+      };
+    });
+
+    console.log("[gameService] runTransaction result:", {
+      committed: result?.committed,
+      snapshotExists: !!result?.snapshot?.exists?.(),
+      snapshotVal: result?.snapshot?.exists?.() ? result.snapshot.val() : null,
+    });
+
+    if (!result.committed) {
+      // analyser l'état renvoyé par le serveur
+      const snap = result.snapshot;
+      const exists = snap?.exists?.() || false;
+      if (!exists) {
+        throw new Error("Partie introuvable");
+      }
+      const val = snap.val();
+      if (val?.playerBUser?.uid) {
+        throw new Error("La partie est déjà pleine");
+      }
+      throw new Error(
+        "Impossible de rejoindre la partie (transaction non commise)",
+      );
+    }
+    return;
+  } catch (e) {
+    console.error("[gameService] joinGame transaction failed:", e);
+    throw e;
   }
 }
 
@@ -125,13 +216,13 @@ export async function lockDeckForGame(gameId, user, selectedDeckIds) {
   }
 
   const combatDeckCards = await buildDeckCardsFromIds(
-    selectedDeckIds.map(String)
+    selectedDeckIds.map(String),
   );
 
   const playerState = createInitialPlayerState(
     uid,
     user.displayName || (isPlayerA ? "Joueur 1" : "Joueur 2"),
-    combatDeckCards
+    combatDeckCards,
   );
 
   const result = await runTransaction(gameRef, (currentGame) => {
@@ -229,7 +320,9 @@ export async function defend(gameId, defenderCardId = null) {
 
 // ✅ AJOUT : utile pour lire l'état brut d'une partie si besoin
 export async function getGame(gameId) {
+  console.log("[getGame] fetching:", gameId);
   const gameRef = ref(rtdb, `games/${gameId}`);
   const snapshot = await get(gameRef);
+  console.log("[getGame] snapshot.exists:", snapshot.exists());
   return snapshot.exists() ? { id: gameId, ...snapshot.val() } : null;
 }

@@ -13,7 +13,6 @@ export default function HomePage() {
     try {
       const user = auth.currentUser;
       if (!user) return alert("Utilisateur non connecté");
-
       const gameId = await createGame(user); // ✅ AJOUT : crée une partie vide
       navigate(`/deck/${gameId}`); // ✅ MODIF : on va ensuite choisir le deck
     } catch (err) {
@@ -61,7 +60,7 @@ export default function HomePage() {
           <Button
             className="bouton-blue"
             variant="contained"
-            onClick={handleCreateGame} // ✅ MODIF
+            onClick={handleCreateGame}
           >
             Nouvelle partie
           </Button>
@@ -69,7 +68,7 @@ export default function HomePage() {
           <Button
             className="bouton-blue"
             variant="contained"
-            onClick={handleJoinGame} // ✅ MODIF
+            onClick={handleJoinGame}
           >
             Rejoindre partie
           </Button>

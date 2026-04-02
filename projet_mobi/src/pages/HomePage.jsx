@@ -8,13 +8,11 @@ import { createGame, joinGame } from "../services/gameService"; // ✅ AJOUT
 
 export default function HomePage() {
   const navigate = useNavigate();
-  
 
   const handleCreateGame = async () => {
     try {
       const user = auth.currentUser;
       if (!user) return alert("Utilisateur non connecté");
-
       const gameId = await createGame(user); // ✅ AJOUT : crée une partie vide
       navigate(`/deck/${gameId}`); // ✅ MODIF : on va ensuite choisir le deck
     } catch (err) {

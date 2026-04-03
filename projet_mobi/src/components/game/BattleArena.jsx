@@ -5,6 +5,11 @@ function boardPower(board = []) {
   return (board || []).reduce((s, c) => s + (c.atk || 0), 0);
 }
 
+function getInitial(name) {
+  if (!name) return "?";
+  return name.trim().charAt(0).toUpperCase();
+}
+
 export default function BattleArena({
   me,
   opponent,
@@ -27,7 +32,10 @@ export default function BattleArena({
   return (
     <div className="ba-container">
       <header className="ba-header">
-        <h2 className="ba-title">Combat</h2>
+        <div>
+          <h2 className="ba-title">Combat</h2>
+          <p className="ba-terrain">{terrainLabel}</p>
+        </div>
 
         <p
           className={`ba-turn ${isMyTurn ? "ba-turn--mine" : "ba-turn--other"}`}
@@ -42,12 +50,22 @@ export default function BattleArena({
 
       <section className="ba-pv-row">
         <div className="ba-pv">
+          <div className="ba-avatar" aria-hidden="true">
+            <div className="ba-avatar-head" />
+            <div className="ba-avatar-body" />
+            <span className="ba-avatar-initial">{getInitial(opponent?.name || "Joueur")}</span>
+          </div>
           <strong>Adversaire</strong>
           <span>
             {opponent?.name || "Joueur"} — {opponent?.hp ?? "-"} PV
           </span>
         </div>
         <div className="ba-pv">
+          <div className="ba-avatar" aria-hidden="true">
+            <div className="ba-avatar-head" />
+            <div className="ba-avatar-body" />
+            <span className="ba-avatar-initial">{getInitial(me?.name || "Joueur")}</span>
+          </div>
           <strong>Moi</strong>
           <span>
             {me?.name || "Joueur"} — {me?.hp ?? "-"} PV
@@ -58,14 +76,18 @@ export default function BattleArena({
       <section>
         <h3 className="ba-subtitle">Terrain adverse</h3>
         <div className="ba-board">
-          {(opponent?.board || []).map((card) => (
-            <div key={card.id} className="ba-card ba-card--opponent">
-              <div className="ba-card-title">{card.name || card.id}</div>
-              <div className="ba-card-stats">
-                ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
+          {(opponent?.board || []).length === 0 ? (
+            <div className="ba-empty-slot">Aucune carte adverse en jeu pour l'instant.</div>
+          ) : (
+            (opponent?.board || []).map((card) => (
+              <div key={card.id} className="ba-card ba-card--opponent">
+                <div className="ba-card-title">{card.name || card.id}</div>
+                <div className="ba-card-stats">
+                  ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </section>
 
@@ -81,22 +103,26 @@ export default function BattleArena({
       <section>
         <h3 className="ba-subtitle">Mon terrain</h3>
         <div className="ba-board">
-          {(me?.board || []).map((card) => (
-            <button
-              key={card.id}
-              type="button"
-              className="ba-card ba-card--button"
-              onClick={() =>
-                mustDefend ? onDefend(card.id) : onAttack(card.id)
-              }
-              disabled={!isMyTurn && !mustDefend}
-            >
-              <div className="ba-card-title">{card.name || card.id}</div>
-              <div className="ba-card-stats">
-                ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
-              </div>
-            </button>
-          ))}
+          {(me?.board || []).length === 0 ? (
+            <div className="ba-empty-slot">Ton terrain est vide. Ajoute des cartes pour lancer l'offensive.</div>
+          ) : (
+            (me?.board || []).map((card) => (
+              <button
+                key={card.id}
+                type="button"
+                className="ba-card ba-card--button"
+                onClick={() =>
+                  mustDefend ? onDefend(card.id) : onAttack(card.id)
+                }
+                disabled={!isMyTurn && !mustDefend}
+              >
+                <div className="ba-card-title">{card.name || card.id}</div>
+                <div className="ba-card-stats">
+                  ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
+                </div>
+              </button>
+            ))
+          )}
         </div>
       </section>
 

@@ -14,18 +14,13 @@ export default function Cartes({ card, onAdd, onRemove, inDeck, disabled }) {
       </div>
       <div className="card-body">
         <div className="card-name">{card.name}</div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 8,
-          }}
-        >
+        <div className="card-actions">
           {inDeck ? (
             <Button
               size="small"
               color="error"
               onClick={() => onRemove(String(card.id))}
+              className="card-action-btn"
             >
               Retirer
             </Button>
@@ -34,6 +29,7 @@ export default function Cartes({ card, onAdd, onRemove, inDeck, disabled }) {
               size="small"
               onClick={() => onAdd(String(card.id))}
               disabled={disabled}
+              className="card-action-btn"
             >
               Ajouter
             </Button>

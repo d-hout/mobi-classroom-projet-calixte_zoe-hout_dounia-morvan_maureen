@@ -28,25 +28,23 @@ export default function Header() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="app-header-wrap" sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
+        className="app-header"
         sx={{
-          backgroundColor: "#0E32A8",
+          backgroundColor: "transparent",
           color: "#FFF",
-          borderRadius: "20px",
+          borderRadius: "22px",
           marginTop: "10px",
+          boxShadow: "none",
+          backgroundImage: "none",
         }}
       >
-        <Toolbar>
+        <Toolbar className="app-header-toolbar">
           <Link
             to="/"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-              display: "flex",
-              alignItems: "center",
-            }}
+            className="app-header-brand"
           >
             <CastleIcon />
             <Typography
@@ -68,6 +66,7 @@ export default function Header() {
               aria-haspopup="true"
               onClick={handleClose}
               color="inherit"
+              className="app-header-icon"
             >
               <StyleIcon />
             </IconButton>
@@ -78,6 +77,7 @@ export default function Header() {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
+              className="app-header-icon"
             >
               <AccountCircle />
             </IconButton>

@@ -152,56 +152,104 @@ export default function DeckPage() {
         : false;
 
   return (
-    <>
+    <div className="deck-page">
       <Header />
-      <Typography
-        variant="h4"
-        component="h1"
-        marginLeft="10px"
-        marginBottom="20px"
-      >
-        Création du deck
-      </Typography>
+      <div className="deck-page-shell">
+        <div className="deck-page-hero">
+          <p className="page-kicker">Preparation du duel</p>
+          <Typography variant="h4" component="h1" className="deck-page-title">
+            Creation du deck
+          </Typography>
+          <p className="page-copy deck-page-copy">
+            Selectionne 10 cartes pour construire un deck equilibre avant le
+            debut du combat.
+          </p>
+        </div>
 
-      {/* ✅ AJOUT : petit état du lobby */}
-      {gameId && (
-        <div style={{ marginLeft: "10px", marginBottom: "16px" }}>
-          <p>
-            ID de la partie : <strong>{gameId}</strong>
+        {gameId && (
+          <section className="deck-lobby-card">
+            <div className="deck-lobby-head">
+              <p>
+                ID de la partie : <strong>{gameId}</strong>
+              </p>
+            </div>
+
+            <div className="deck-lobby-grid">
+              <div className="deck-lobby-player">
+                <div className="deck-lobby-name">
+                  {game?.playerAUser?.name || "Joueur A"}{" "}
+                  {game?.playerAUser?.uid === uid ? "(Moi)" : ""}
+                </div>
+                <div className="deck-lobby-ready">
+                  Pret : {game?.playerAUser?.deckReady ? "Oui" : "Non"}
+                </div>
+              </div>
+
+              <div className="deck-lobby-player">
+                <div className="deck-lobby-name">
+                  {game?.playerBUser?.name || "Joueur B"}{" "}
+                  {game?.playerBUser?.uid === uid ? "(Moi)" : ""}
+                </div>
+                <div className="deck-lobby-ready">
+                  Pret : {game?.playerBUser?.deckReady ? "Oui" : "Non"}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <Paper
+          elevation={2}
+          className="deck-summary-panel deck-summary-panel--top"
+          sx={{ p: 2 }}
+        >
+          <Typography
+            variant="subtitle2"
+            component="div"
+            className="deck-summary-title"
+          >
+            Résumé
+          </Typography>
+
+          <p className="deck-summary-count">
+            Cartes selectionnees: {selected.length} / 10
           </p>
 
-          {/* Affichage explicite des joueurs pour éviter la confusion */}
-          <div style={{ display: "flex", gap: 24, marginTop: 8 }}>
-            <div>
-              <div style={{ fontWeight: 600 }}>
-                {game?.playerAUser?.name || "Joueur A"}{" "}
-                {game?.playerAUser?.uid === uid ? "(Moi)" : ""}
-              </div>
-              <div>Prêt : {game?.playerAUser?.deckReady ? "Oui" : "Non"}</div>
-            </div>
-
-            <div>
-              <div style={{ fontWeight: 600 }}>
-                {game?.playerBUser?.name || "Joueur B"}{" "}
-                {game?.playerBUser?.uid === uid ? "(Moi)" : ""}
-              </div>
-              <div>Prêt : {game?.playerBUser?.deckReady ? "Oui" : "Non"}</div>
-            </div>
+          <div className="summary-thumbs">
+            {selected.map((id) => {
+              const c = cards.find((x) => String(x.id) === String(id));
+              return c ? (
+                <div key={id} className="summary-thumb">
+                  <img
+                    src={getDisplayImageUrl(c.image)}
+                    alt={c.name}
+                    onError={handleImageError}
+                    className="summary-thumb-image"
+                  />
+                </div>
+              ) : (
+                <div key={id} className="summary-thumb summary-thumb--empty" />
+              );
+            })}
           </div>
-        </div>
-      )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 8,
-            }}
-          >
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div className="deck-summary-actions">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSave}
+              disabled={selected.length !== 10 || saving}
+              className="bouton-blue"
+            >
+              {saving ? "Sauvegarde..." : "Sauvegarder le deck"}
+            </Button>
+          </div>
+        </Paper>
+
+        <div className="deck-layout">
+          <div className="deck-main-panel">
+            <div className="deck-toolbar">
+            <div className="deck-toolbar-left">
               <TextField
                 size="small"
                 placeholder="Rechercher un personnage"
@@ -211,12 +259,14 @@ export default function DeckPage() {
                   if (e.key === "Enter") onSearch();
                 }}
                 sx={{ width: 320 }}
+                className="deck-search"
               />
               <Button
                 size="small"
                 variant="outlined"
                 onClick={onSearch}
                 disabled={isSearching || loading}
+                className="deck-toolbar-btn"
               >
                 Rechercher
               </Button>
@@ -229,21 +279,17 @@ export default function DeckPage() {
                 }}
                 disabled={loading}
                 sx={{ ml: 1 }}
+                className="deck-toolbar-btn deck-toolbar-btn--plain"
               >
                 Réinitialiser
               </Button>
             </div>
 
-            <div>
+            <div className="deck-toolbar-right">
               <Typography
                 variant="subtitle2"
                 component="div"
-                sx={{
-                  fontSize: "0.85rem",
-                  fontWeight: 500,
-                  display: "inline-block",
-                  mr: 2,
-                }}
+                className="deck-counter"
               >
                 Cartes affichées: {cards.length}
               </Typography>
@@ -251,6 +297,7 @@ export default function DeckPage() {
                 size="small"
                 onClick={loadMore}
                 disabled={loading || !!query}
+                className="deck-toolbar-btn"
               >
                 Charger plus
               </Button>
@@ -258,10 +305,10 @@ export default function DeckPage() {
           </div>
 
           {loading ? (
-            <p>Chargement...</p>
+            <p className="deck-loading">Chargement...</p>
           ) : (
             <Grid container>
-              <div style={{ display: "flex", flexWrap: "wrap" }}>
+              <div className="cards-wrap">
                 {cards.map((c) => (
                   <Cartes
                     key={c.id}
@@ -277,57 +324,9 @@ export default function DeckPage() {
               </div>
             </Grid>
           )}
+          </div>
         </div>
-
-        <Paper elevation={2} sx={{ p: 2 }}>
-          <Typography
-            variant="subtitle2"
-            component="div"
-            sx={{ fontSize: "0.95rem", mb: 1 }}
-          >
-            Résumé
-          </Typography>
-
-          <p>Cartes sélectionnées: {selected.length} / 10</p>
-
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {selected.map((id) => {
-              const c = cards.find((x) => String(x.id) === String(id));
-              return c ? (
-                <div key={id} style={{ width: 80, margin: 4 }}>
-                  <img
-                    src={getDisplayImageUrl(c.image)}
-                    alt={c.name}
-                    onError={handleImageError}
-                    style={{ width: "100%", height: 60, objectFit: "cover" }}
-                  />
-                </div>
-              ) : (
-                <div
-                  key={id}
-                  style={{
-                    width: 80,
-                    height: 60,
-                    margin: 4,
-                    background: "#f3f3f3",
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          <div style={{ marginTop: 12 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSave}
-              disabled={selected.length !== 10 || saving} // ✅ MODIF
-            >
-              {saving ? "Sauvegarde..." : "Sauvegarder le deck"}
-            </Button>
-          </div>
-        </Paper>
       </div>
-    </>
+    </div>
   );
 }

@@ -40,39 +40,39 @@ export default function HomePage() {
   return (
     <>
       <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          backgroundImage: `url(${bg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          zIndex: -1,
-        }}
-      ></div>
+        className="home-page-background"
+        style={{ backgroundImage: `url(${bg})` }}
+      />
 
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+      <div className="home-page">
         <Header />
-        <div className="center">
-          <Button
-            className="bouton-blue"
-            variant="contained"
-            onClick={handleCreateGame}
-          >
-            Nouvelle partie
-          </Button>
+        <section className="home-hero">
+          <p className="page-kicker">Disney Card Battle</p>
+          <h1>Choisis ton aventure et ouvre le portail du duel</h1>
+          <p className="page-copy">
+            Cree une nouvelle partie ou rejoins une salle existante pour
+            composer ton deck et affronter un autre joueur dans une arene
+            enchantee.
+          </p>
 
-          <Button
-            className="bouton-blue"
-            variant="contained"
-            onClick={handleJoinGame}
-          >
-            Rejoindre partie
-          </Button>
-        </div>
+          <div className="home-actions">
+            <Button
+              className="bouton-blue"
+              variant="contained"
+              onClick={handleCreateGame}
+            >
+              Nouvelle partie
+            </Button>
+
+            <Button
+              className="bouton-blue bouton-blue--ghost"
+              variant="contained"
+              onClick={handleJoinGame}
+            >
+              Rejoindre partie
+            </Button>
+          </div>
+        </section>
       </div>
     </>
   );

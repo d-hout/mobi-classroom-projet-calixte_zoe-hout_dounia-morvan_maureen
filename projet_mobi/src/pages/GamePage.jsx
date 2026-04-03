@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import BattleArena from '../components/game/BattleArena';
 import { subscribeToGame, attack, defend } from '../services/gameService';
 import { useAuth } from '../hooks/useAuth';
+import './GamePage.css';
 
 export default function GamePage() {
   const { gameId } = useParams(); // récupération de l'id de la partie depuis l'URL
@@ -16,7 +17,17 @@ export default function GamePage() {
     return unsub;
   }, [gameId]);
 
-  if (!game || !user) return <div>Chargement...</div>;
+  if (!game || !user) {
+    return (
+      <div className="game-page">
+        <div className="game-shell game-shell--loading">
+          <p className="game-kicker">Disney Card Battle</p>
+          <h1>Chargement de la partie...</h1>
+          <p>Préparation du château, des cartes et de l'arène enchantée.</p>
+        </div>
+      </div>
+    );
+  }
 
   // Plus propre: on attend vraiment que la partie soit prête
   if (game.status !== "playing" || !game.playerA || !game.playerB) {
@@ -31,12 +42,39 @@ export default function GamePage() {
 
     
     return (
-      <div style={{ padding: 24 }}>
-        <h2>Partie en attente</h2>
-        <p>ID de la partie : {gameId}</p>
-        <p>Mon deck prêt : {meReady ? "Oui" : "Non"}</p>
-        <p>Deck adverse prêt : {opponentReady ? "Oui" : "Non"}</p>
-        <p>En attente que les deux joueurs valident leur deck...</p>
+      <div className="game-page">
+        <section className="game-shell game-shell--waiting">
+          <div className="waiting-layout">
+            <div className="waiting-hero">
+              <p className="game-kicker">Salle d'attente royale</p>
+              <h1>Partie en attente</h1>
+              <p className="game-intro">
+                Les deux joueurs doivent confirmer leur deck avant d'ouvrir le duel.
+              </p>
+
+              <div className="waiting-room-badge">
+                <span className="waiting-room-label">Salon</span>
+                <strong>{gameId}</strong>
+              </div>
+
+              <div className="waiting-steps">
+                <div className={`waiting-step ${meReady ? 'waiting-step--done' : ''}`}>
+                  <span className="waiting-step-dot" />
+                  Ton deck est {meReady ? 'pret' : 'en preparation'}
+                </div>
+                <div className={`waiting-step ${opponentReady ? 'waiting-step--done' : ''}`}>
+                  <span className="waiting-step-dot" />
+                  Le deck adverse est {opponentReady ? 'pret' : 'en preparation'}
+                </div>
+              </div>
+              
+
+              <p className="game-waiting-note">
+                Des que les deux decks sont valides, le combat commence automatiquement.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
@@ -50,14 +88,18 @@ export default function GamePage() {
     pendingAttack?.defenderPlayerKey === (isPlayerA ? "playerA" : "playerB");
 
   return (
-    <BattleArena //composant d'affichage du plateau de jeu
-      me={me}
-      opponent={opponent}
-      isMyTurn={isMyTurn && game.phase === 'attack'}
-      pendingAttack={amDefender ? pendingAttack : null}
-      onAttack={(cardId) => attack(gameId, cardId)}
-      onDefend={(cardId) => defend(gameId, cardId)}
-      onTakeHit={() => defend(gameId, null)}
-    />
+    <div className="game-page">
+      <div className="game-shell">
+        <BattleArena //composant d'affichage du plateau de jeu
+          me={me}
+          opponent={opponent}
+          isMyTurn={isMyTurn && game.phase === 'attack'}
+          pendingAttack={amDefender ? pendingAttack : null}
+          onAttack={(cardId) => attack(gameId, cardId)}
+          onDefend={(cardId) => defend(gameId, cardId)}
+          onTakeHit={() => defend(gameId, null)}
+        />
+      </div>
+    </div>
   );
 }

@@ -15,6 +15,7 @@ import { getUserDeck, saveUserDeck } from "../services/deckService";
 import { getDisplayImageUrl, handleImageError } from "../utils/imageUtils";
 import { useNavigate, useParams } from "react-router-dom";
 import { lockDeckForGame, subscribeToGame } from "../services/gameService";
+import { enrichCardsWithSharedCombatStats } from "../services/combatCardService";
 
 const USERS_COLLECTION = "utilisateurs";
 
@@ -40,6 +41,7 @@ export default function DeckPage() {
     setLoading(true);
 
     fetchLocalDisneyCharacters(page, pageSize)
+      .then((list) => enrichCardsWithSharedCombatStats(list))
       .then((list) => {
         if (!mounted) return;
         setCards((prev) => {
@@ -126,7 +128,7 @@ export default function DeckPage() {
 
     try {
       const found = await searchLocalDisneyCharacters(term);
-      setCards(found);
+      setCards(await enrichCardsWithSharedCombatStats(found));
     } catch (err) {
       console.error("search error", err);
       setCards([]);

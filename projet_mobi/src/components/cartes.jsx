@@ -14,6 +14,9 @@ export default function Cartes({ card, onAdd, onRemove, inDeck, disabled }) {
       </div>
       <div className="card-body">
         <div className="card-name">{card.name}</div>
+        <div className="card-stats">
+          ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
+        </div>
         <div className="card-actions">
           {inDeck ? (
             <Button

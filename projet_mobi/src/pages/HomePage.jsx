@@ -1,13 +1,30 @@
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Button from "@mui/material/Button";
 import "../App.css";
 import bg from "../assets/disney2.jpg";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../services/firebaseConfig";
-import { createGame, joinGame } from "../services/gameService"; // ✅ AJOUT
+import {
+  createGame,
+  joinGame,
+  subscribeToOpenGames,
+} from "../services/gameService";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [openGames, setOpenGames] = useState([]);
+  const [joiningGameId, setJoiningGameId] = useState(null);
+  const [showOpenGames, setShowOpenGames] = useState(false);
+  const currentUid = auth.currentUser?.uid;
+  const otherPlayersGames = openGames.filter(
+    (game) => game.playerAUser?.uid !== currentUid,
+  );
+
+  useEffect(() => {
+    const unsub = subscribeToOpenGames(setOpenGames);
+    return unsub;
+  }, []);
 
   const handleCreateGame = async () => {
     try {
@@ -21,19 +38,19 @@ export default function HomePage() {
     }
   };
 
-  const handleJoinGame = async () => {
-    const gameId = prompt("Entre l'ID de la partie :"); // ✅ tu pourras remplacer plus tard par une vraie UI
-    if (!gameId) return;
-
+  const handleJoinGame = async (gameId) => {
     try {
       const user = auth.currentUser;
       if (!user) return alert("Utilisateur non connecté");
+      setJoiningGameId(gameId);
 
-      await joinGame(gameId, user); // ✅ AJOUT : rejoint la partie vide
-      navigate(`/deck/${gameId}`); // ✅ MODIF : puis choix du deck
+      await joinGame(gameId, user);
+      navigate(`/deck/${gameId}`);
     } catch (err) {
       console.error("join game error", err);
       alert(err.message || "Erreur lors de la connexion à la partie");
+    } finally {
+      setJoiningGameId(null);
     }
   };
 
@@ -50,9 +67,9 @@ export default function HomePage() {
           <p className="page-kicker">Disney Card Battle</p>
           <h1>Choisis ton aventure et ouvre le portail du duel</h1>
           <p className="page-copy">
-            Cree une nouvelle partie ou rejoins une salle existante pour
-            composer ton deck et affronter un autre joueur dans une arene
-            enchantee.
+            Crée une nouvelle partie ou rejoins une partie existante 
+            pour affronter un autre joueur dans une arène
+            enchantée.
           </p>
 
           <div className="home-actions">
@@ -67,11 +84,61 @@ export default function HomePage() {
             <Button
               className="bouton-blue bouton-blue--ghost"
               variant="contained"
-              onClick={handleJoinGame}
+              onClick={() => setShowOpenGames((value) => !value)}
             >
-              Rejoindre partie
+              {showOpenGames ? "Masquer les parties" : "Rejoindre une partie"}
             </Button>
           </div>
+
+          {showOpenGames && (
+            <section className="home-open-games">
+              <div className="home-open-games-head">
+                <h2>Parties disponibles</h2>
+                <p>
+                  Clique sur une partie pour rejoindre directement le joueur deja
+                  connecte.
+                </p>
+              </div>
+
+              {otherPlayersGames.length === 0 ? (
+                <div className="home-open-games-empty">
+                  Aucune partie d'un autre joueur n'est disponible pour le moment.
+                </div>
+              ) : (
+                <div className="home-open-games-list">
+                  {otherPlayersGames.map((game) => {
+                    const isJoining = joiningGameId === game.id;
+
+                    return (
+                      <button
+                        key={game.id}
+                        type="button"
+                        className="home-game-card"
+                        onClick={() => handleJoinGame(game.id)}
+                        disabled={isJoining}
+                      >
+                        <div className="home-game-card-top">
+                          <span className="home-game-card-label">Hote</span>
+                          <span className="home-game-card-status">
+                            Disponible
+                          </span>
+                        </div>
+                        <div className="home-game-card-name">
+                          {game.playerAUser?.name || "Joueur 1"}
+                        </div>
+                        <div className="home-game-card-meta">
+                          Partie : {game.id}
+                        </div>
+                        <div className="home-game-card-action">
+                          {isJoining ? "Connexion..." : "Cliquer pour rejoindre"}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </section>
+          )}
         </section>
       </div>
     </>

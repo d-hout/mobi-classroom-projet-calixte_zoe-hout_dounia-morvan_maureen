@@ -5,35 +5,13 @@ import {
   declareAttack,
   resolveDefense,
 } from "../game/gameEngine";
-import { fetchDisneyCharacters } from "./disneyService";
+import { getSharedCombatCardsList } from "./combatCardService";
 
 let allCardsCachePromise = null;
 
-function toCombatCard(card) {
-  const cardId = String(card.id);
-  const score = cardId
-    .split("")
-    .reduce((sum, char) => sum + char.charCodeAt(0), 0);
-
-  return {
-    id: cardId,
-    name: card.name,
-    image: card.image,
-    atk: (score % 7) + 3,
-    def: (score % 6) + 2,
-  };
-}
-
 async function getAllCards() {
   if (!allCardsCachePromise) {
-    allCardsCachePromise = (async () => {
-      const pages = await Promise.all(
-        Array.from({ length: 6 }, (_, index) =>
-          fetchDisneyCharacters(index + 1, 50),
-        ),
-      );
-      return pages.flat().map(toCombatCard);
-    })();
+    allCardsCachePromise = getSharedCombatCardsList();
   }
   return allCardsCachePromise;
 }
@@ -271,6 +249,25 @@ export async function lockDeckForGame(gameId, user, selectedDeckIds) {
     throw new Error("Impossible de verrouiller le deck");
   }
 }
+
+export function subscribeToOpenGames(callback) {
+  const gamesRef = ref(rtdb, "games");
+
+  return onValue(gamesRef, (snapshot) => {
+    if (!snapshot.exists()) {
+      callback([]);
+      return;
+    }
+
+    const games = Object.entries(snapshot.val() || {})
+      .map(([id, game]) => ({ id, ...game }))
+      .filter((game) => game.status === "deck_selection" && !game.playerBUser?.uid)
+      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    callback(games);
+  });
+}
+
 export function subscribeToGame(gameId, callback) {
   const gameRef = ref(rtdb, `games/${gameId}`);
 

@@ -136,6 +136,106 @@ a {
   margin-top: 34px;
 }
 
+.home-open-games {
+  margin-top: 36px;
+  padding: 24px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+}
+
+.home-open-games-head h2 {
+  margin: 0;
+  color: var(--app-cream);
+  font-size: 1.4rem;
+}
+
+.home-open-games-head p {
+  margin: 8px 0 0;
+  color: #dce8ff;
+}
+
+.home-open-games-empty {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(8, 19, 37, 0.5);
+  color: #e6efff;
+}
+
+.home-open-games-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.home-game-card {
+  padding: 18px;
+  border: 1px solid rgba(246, 207, 113, 0.2);
+  border-radius: 22px;
+  text-align: left;
+  color: inherit;
+  background:
+    linear-gradient(180deg, rgba(12, 28, 56, 0.92), rgba(9, 22, 43, 0.92));
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.home-game-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(246, 207, 113, 0.5);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+}
+
+.home-game-card:disabled {
+  opacity: 0.72;
+  cursor: default;
+}
+
+.home-game-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.home-game-card-label {
+  color: #ffe7a8;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.home-game-card-status {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(246, 207, 113, 0.14);
+  color: #ffe7a8;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.home-game-card-name {
+  margin-top: 14px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--app-cream);
+}
+
+.home-game-card-meta {
+  margin-top: 8px;
+  color: #c8d8fb;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.home-game-card-action {
+  margin-top: 14px;
+  color: #ffe7a8;
+  font-weight: 700;
+}
+
 .bouton-blue {
   min-width: 220px !important;
   border-radius: 999px !important;
@@ -326,6 +426,14 @@ a {
   line-height: 1.25;
 }
 
+.card-stats {
+  margin-top: 8px;
+  color: rgba(255, 243, 205, 0.84);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
 .card-actions {
   display: flex;
   justify-content: space-between;
@@ -396,6 +504,10 @@ a {
     min-height: auto;
     padding: 28px;
     margin-top: 14px;
+  }
+
+  .home-open-games {
+    padding: 18px;
   }
 
   .deck-layout,

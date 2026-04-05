@@ -16,30 +16,30 @@ async function getAllCards() {
   return allCardsCachePromise;
 }
 
-// ✅ AJOUT : transforme une liste d'ids en vraies cartes de combat
+// Transforme une liste d'ids en vraies cartes de combat
 async function buildDeckCardsFromIds(deckIds) {
   const allCards = await getAllCards();
   return allCards.filter((c) => deckIds.includes(String(c.id)));
 }
 
-// ✅ MODIF : crée une partie vide
+// Crée une partie vide
 export async function createGame(hostUser) {
   const gameId = crypto.randomUUID();
   const gameRef = ref(rtdb, `games/${gameId}`);
   console.log("[createGame] creating gameId=", gameId, "user=", hostUser?.uid);
   await set(gameRef, {
-    status: "deck_selection", // ✅ MODIF : la partie commence en sélection de deck
+    status: "deck_selection", // La partie commence avec la sélection du deck
     createdBy: hostUser.uid,
     playerAUser: {
       uid: hostUser.uid,
       name: hostUser.displayName || "Joueur 1",
-      deckReady: false, // ✅ AJOUT
+      deckReady: false,
     },
-    playerBUser: null, // ✅ AJOUT : le joueur 2 n'est pas encore là
-    playerA: null, // ✅ AJOUT : état de combat non initialisé
-    playerB: null, // ✅ AJOUT
-    currentTurn: null, // ✅ AJOUT
-    phase: "setup", // ✅ MODIF
+    playerBUser: null,
+    playerA: null,
+    playerB: null,
+    currentTurn: null,
+    phase: "setup",
     pendingAttack: null,
     winner: null,
     createdAt: Date.now(),
@@ -48,7 +48,7 @@ export async function createGame(hostUser) {
   return gameId;
 }
 
-// ✅ MODIF : rejoint une partie sans encore initialiser le deck combat
+// Rejoint une partie sans encore initialiser le deck combat
 export async function joinGame(gameId, guestUser) {
   console.log(
     "[gameService] joinGame called with id:",
@@ -175,7 +175,7 @@ export async function joinGame(gameId, guestUser) {
   }
 }
 
-// ✅ AJOUT : quand un joueur valide son deck sur DeckPage
+// Quand un joueur valide son deck
 export async function lockDeckForGame(gameId, user, selectedDeckIds) {
   const gameRef = ref(rtdb, `games/${gameId}`);
   const uid = user.uid;
@@ -261,7 +261,9 @@ export function subscribeToOpenGames(callback) {
 
     const games = Object.entries(snapshot.val() || {})
       .map(([id, game]) => ({ id, ...game }))
-      .filter((game) => game.status === "deck_selection" && !game.playerBUser?.uid)
+      .filter(
+        (game) => game.status === "deck_selection" && !game.playerBUser?.uid,
+      )
       .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
     callback(games);
@@ -285,7 +287,7 @@ export async function attack(gameId, attackerCardId) {
 
   await runTransaction(gameRef, (game) => {
     if (!game) return game;
-    if (game.status !== "playing") return game; // ✅ AJOUT : on bloque si la partie n'a pas démarré
+    if (game.status !== "playing") return game; // On bloque si la partie n'a pas démarré
 
     const attackerPlayerKey =
       game.playerA.uid === game.currentTurn ? "playerA" : "playerB";
@@ -304,9 +306,18 @@ export async function defend(gameId, defenderCardId = null) {
 
   await runTransaction(gameRef, (game) => {
     if (!game) return game;
-    if (game.status !== "playing") return game; // ✅ AJOUT
+    if (game.status !== "playing") return game;
 
     const updated = resolveDefense(game, defenderCardId);
+
+    if (updated.status === "finished") {
+      return {
+        ...updated,
+        phase: "end",
+        pendingAttack: null,
+        updatedAt: Date.now(),
+      };
+    }
 
     return {
       ...updated,
@@ -315,7 +326,7 @@ export async function defend(gameId, defenderCardId = null) {
   });
 }
 
-// ✅ AJOUT : utile pour lire l'état brut d'une partie si besoin
+// Utile pour lire l'état brut d'une partie si besoin
 export async function getGame(gameId) {
   console.log("[getGame] fetching:", gameId);
   const gameRef = ref(rtdb, `games/${gameId}`);

@@ -10,12 +10,18 @@ const MAX_PAGES = 3;
 /*const limitedCards = validCards.slice(0, 200);
 fs.writeFileSync(OUTPUT_FILE, JSON.stringify(limitedCards, null, 2), "utf-8");*/
 
-// ✅ AJOUT : équivalent de __dirname en ES module
+// équivalent de __dirname en ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ chemin de sortie
-const OUTPUT_FILE = path.join(__dirname, "..", "src", "data", "disneyCards.json");
+// Chemin de sortie
+const OUTPUT_FILE = path.join(
+  __dirname,
+  "..",
+  "src",
+  "data",
+  "disneyCards.json",
+);
 
 async function fetchCharacters(page, pageSize = PAGE_SIZE) {
   console.log(`Fetch page ${page}...`);
@@ -86,7 +92,7 @@ async function main() {
     const ok = await isImageValid(card.image);
 
     console.log(
-      `[${i + 1}/${normalized.length}] ${card.name} -> ${ok ? "OK" : "KO"}`
+      `[${i + 1}/${normalized.length}] ${card.name} -> ${ok ? "OK" : "KO"}`,
     );
 
     if (ok) {

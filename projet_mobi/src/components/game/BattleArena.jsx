@@ -53,7 +53,9 @@ export default function BattleArena({
           <div className="ba-avatar" aria-hidden="true">
             <div className="ba-avatar-head" />
             <div className="ba-avatar-body" />
-            <span className="ba-avatar-initial">{getInitial(opponent?.name || "Joueur")}</span>
+            <span className="ba-avatar-initial">
+              {getInitial(opponent?.name || "Joueur")}
+            </span>
           </div>
           <strong>Adversaire</strong>
           <span>
@@ -64,7 +66,9 @@ export default function BattleArena({
           <div className="ba-avatar" aria-hidden="true">
             <div className="ba-avatar-head" />
             <div className="ba-avatar-body" />
-            <span className="ba-avatar-initial">{getInitial(me?.name || "Joueur")}</span>
+            <span className="ba-avatar-initial">
+              {getInitial(me?.name || "Joueur")}
+            </span>
           </div>
           <strong>Moi</strong>
           <span>
@@ -77,10 +81,17 @@ export default function BattleArena({
         <h3 className="ba-subtitle">Terrain adverse</h3>
         <div className="ba-board">
           {(opponent?.board || []).length === 0 ? (
-            <div className="ba-empty-slot">Aucune carte adverse en jeu pour l'instant.</div>
+            <div className="ba-empty-slot">
+              Aucune carte adverse en jeu pour l'instant.
+            </div>
           ) : (
             (opponent?.board || []).map((card) => (
               <div key={card.id} className="ba-card ba-card--opponent">
+                <img
+                  src={card.image || "/card-back.png"}
+                  alt={card.name || "Carte inconnue"}
+                  className="ba-card-image"
+                />
                 <div className="ba-card-title">{card.name || card.id}</div>
                 <div className="ba-card-stats">
                   ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
@@ -104,7 +115,9 @@ export default function BattleArena({
         <h3 className="ba-subtitle">Mon terrain</h3>
         <div className="ba-board">
           {(me?.board || []).length === 0 ? (
-            <div className="ba-empty-slot">Ton terrain est vide. Ajoute des cartes pour lancer l'offensive.</div>
+            <div className="ba-empty-slot">
+              Ton terrain est vide. Ajoute des cartes pour lancer l'offensive.
+            </div>
           ) : (
             (me?.board || []).map((card) => (
               <button
@@ -116,6 +129,11 @@ export default function BattleArena({
                 }
                 disabled={!isMyTurn && !mustDefend}
               >
+                <img
+                  src={card.image || "/card-back.png"}
+                  alt={card.name || "Carte inconnue"}
+                  className="ba-card-image"
+                />
                 <div className="ba-card-title">{card.name || card.id}</div>
                 <div className="ba-card-stats">
                   ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}

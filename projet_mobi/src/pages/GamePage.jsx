@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import BattleArena from '../components/game/BattleArena';
-import { subscribeToGame, attack, defend } from '../services/gameService';
-import { useAuth } from '../hooks/useAuth';
-import './GamePage.css';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import BattleArena from "../components/game/BattleArena";
+import EndScreen from "../components/EndScreen";
+import { subscribeToGame, attack, defend } from "../services/gameService";
+import { useAuth } from "../hooks/useAuth";
+import "./GamePage.css";
+import Header from "../components/Header";
 
 export default function GamePage() {
-  const { gameId } = useParams(); // récupération de l'id de la partie depuis l'URL
-  const { user } = useAuth(); // récupération de l'utilisateur actuellement connecté
-  const [game, setGame] = useState(null); // création d'une variable d'état React game qui contient les données actuelles de la partie
+  const { gameId } = useParams();
+  const { user } = useAuth();
+  const [game, setGame] = useState(null);
 
-  //Ecouter la partie active
+  // Ecouter la partie active
   useEffect(() => {
     if (!gameId) return;
     const unsub = subscribeToGame(gameId, setGame);
@@ -29,7 +31,19 @@ export default function GamePage() {
     );
   }
 
-  // Plus propre: on attend vraiment que la partie soit prête
+  // Ecran de fin de partie
+  if (game.status === "finished") {
+    return (
+      <div className="game-page">
+        <Header />
+        <div className="game-shell">
+          <EndScreen game={game} currentUser={user} />
+        </div>
+      </div>
+    );
+  }
+
+  // Attente (deck pas prêts)
   if (game.status !== "playing" || !game.playerA || !game.playerB) {
     const amPlayerA = game.playerAUser?.uid === user.uid;
     const meReady = amPlayerA
@@ -40,7 +54,6 @@ export default function GamePage() {
       ? game.playerBUser?.deckReady
       : game.playerAUser?.deckReady;
 
-    
     return (
       <div className="game-page">
         <section className="game-shell game-shell--waiting">
@@ -49,7 +62,8 @@ export default function GamePage() {
               <p className="game-kicker">Salle d'attente royale</p>
               <h1>Partie en attente</h1>
               <p className="game-intro">
-                Les deux joueurs doivent confirmer leur deck avant d'ouvrir le duel.
+                Les deux joueurs doivent confirmer leur deck avant d'ouvrir le
+                duel.
               </p>
 
               <div className="waiting-room-badge">
@@ -58,19 +72,24 @@ export default function GamePage() {
               </div>
 
               <div className="waiting-steps">
-                <div className={`waiting-step ${meReady ? 'waiting-step--done' : ''}`}>
+                <div
+                  className={`waiting-step ${meReady ? "waiting-step--done" : ""}`}
+                >
                   <span className="waiting-step-dot" />
-                  Ton deck est {meReady ? 'pret' : 'en preparation'}
+                  Ton deck est {meReady ? "pret" : "en preparation"}
                 </div>
-                <div className={`waiting-step ${opponentReady ? 'waiting-step--done' : ''}`}>
+                <div
+                  className={`waiting-step ${opponentReady ? "waiting-step--done" : ""}`}
+                >
                   <span className="waiting-step-dot" />
-                  Le deck adverse est {opponentReady ? 'pret' : 'en preparation'}
+                  Le deck adverse est{" "}
+                  {opponentReady ? "pret" : "en preparation"}
                 </div>
               </div>
-              
 
               <p className="game-waiting-note">
-                Des que les deux decks sont valides, le combat commence automatiquement.
+                Dès que les deux decks sont valides, le combat commence
+                automatiquement.
               </p>
             </div>
           </div>
@@ -79,6 +98,7 @@ export default function GamePage() {
     );
   }
 
+  // Jeu en cours
   const isPlayerA = game.playerA?.uid === user.uid;
   const me = isPlayerA ? game.playerA : game.playerB;
   const opponent = isPlayerA ? game.playerB : game.playerA;
@@ -90,10 +110,10 @@ export default function GamePage() {
   return (
     <div className="game-page">
       <div className="game-shell">
-        <BattleArena //composant d'affichage du plateau de jeu
+        <BattleArena
           me={me}
           opponent={opponent}
-          isMyTurn={isMyTurn && game.phase === 'attack'}
+          isMyTurn={isMyTurn && game.phase === "attack"}
           pendingAttack={amDefender ? pendingAttack : null}
           onAttack={(cardId) => attack(gameId, cardId)}
           onDefend={(cardId) => defend(gameId, cardId)}

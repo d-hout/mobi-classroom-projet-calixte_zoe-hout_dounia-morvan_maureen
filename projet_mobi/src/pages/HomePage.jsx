@@ -30,8 +30,8 @@ export default function HomePage() {
     try {
       const user = auth.currentUser;
       if (!user) return alert("Utilisateur non connecté");
-      const gameId = await createGame(user); // ✅ AJOUT : crée une partie vide
-      navigate(`/deck/${gameId}`); // ✅ MODIF : on va ensuite choisir le deck
+      const gameId = await createGame(user); // Crée une partie vide
+      navigate(`/deck/${gameId}`);
     } catch (err) {
       console.error("create game error", err);
       alert(err.message || "Erreur lors de la création de la partie");
@@ -67,9 +67,8 @@ export default function HomePage() {
           <p className="page-kicker">Disney Card Battle</p>
           <h1>Choisis ton aventure et ouvre le portail du duel</h1>
           <p className="page-copy">
-            Crée une nouvelle partie ou rejoins une partie existante 
-            pour affronter un autre joueur dans une arène
-            enchantée.
+            Crée une nouvelle partie ou rejoins une partie existante pour
+            affronter un autre joueur dans une arène enchantée.
           </p>
 
           <div className="home-actions">
@@ -95,14 +94,15 @@ export default function HomePage() {
               <div className="home-open-games-head">
                 <h2>Parties disponibles</h2>
                 <p>
-                  Clique sur une partie pour rejoindre directement le joueur deja
-                  connecte.
+                  Clique sur une partie pour rejoindre directement le joueur
+                  déjà connecté.
                 </p>
               </div>
 
               {otherPlayersGames.length === 0 ? (
                 <div className="home-open-games-empty">
-                  Aucune partie d'un autre joueur n'est disponible pour le moment.
+                  Aucune partie d'un autre joueur n'est disponible pour le
+                  moment.
                 </div>
               ) : (
                 <div className="home-open-games-list">
@@ -130,7 +130,9 @@ export default function HomePage() {
                           Partie : {game.id}
                         </div>
                         <div className="home-game-card-action">
-                          {isJoining ? "Connexion..." : "Cliquer pour rejoindre"}
+                          {isJoining
+                            ? "Connexion..."
+                            : "Cliquer pour rejoindre"}
                         </div>
                       </button>
                     );

@@ -26,13 +26,13 @@ export default function DeckPage() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [game, setGame] = useState(null); // ✅ AJOUT : pour suivre l'état de la partie
-  const [saving, setSaving] = useState(false); // ✅ AJOUT : éviter les doubles clics
+  const [game, setGame] = useState(null); // Permet de suivre l'état de la partie
+  const [saving, setSaving] = useState(false); // Eviter les doubles clics
   const pageSize = 48;
   const uid = auth?.currentUser?.uid;
 
-  const navigate = useNavigate(); // ✅ correct : navigate est défini ici
-  const { gameId } = useParams(); // ✅ AJOUT
+  const navigate = useNavigate();
+  const { gameId } = useParams();
 
   useEffect(() => {
     if (query && query.trim().length > 0) return;
@@ -70,7 +70,7 @@ export default function DeckPage() {
     };
   }, [uid, page, query]);
 
-  // ✅ AJOUT : écoute la partie pour savoir si les 2 decks sont prêts
+  // Verifie si les 2 decks sont prêts
   useEffect(() => {
     if (!gameId) return;
     const unsub = subscribeToGame(gameId, setGame);
@@ -78,7 +78,7 @@ export default function DeckPage() {
   }, [gameId]);
 
   const handleAdd = (cardId) => {
-    const normalizedId = String(cardId); // ✅ MODIF
+    const normalizedId = String(cardId);
     if (selected.length >= 10) return;
     if (!selected.includes(normalizedId)) {
       setSelected((s) => [...s, normalizedId]);
@@ -86,7 +86,7 @@ export default function DeckPage() {
   };
 
   const handleRemove = (cardId) =>
-    setSelected((s) => s.filter((id) => id !== String(cardId))); // ✅ MODIF
+    setSelected((s) => s.filter((id) => id !== String(cardId)));
 
   const handleSave = async () => {
     if (!uid) return alert("Connecte-toi d'abord.");
@@ -138,7 +138,6 @@ export default function DeckPage() {
     }
   };
 
-  // ✅ AJOUT : infos lobby simples
   const myReady =
     game?.playerAUser?.uid === uid
       ? game?.playerAUser?.deckReady
@@ -158,13 +157,13 @@ export default function DeckPage() {
       <Header />
       <div className="deck-page-shell">
         <div className="deck-page-hero">
-          <p className="page-kicker">Preparation du duel</p>
+          <p className="page-kicker">Préparation du duel</p>
           <Typography variant="h4" component="h1" className="deck-page-title">
-            Creation du deck
+            Création du deck
           </Typography>
           <p className="page-copy deck-page-copy">
-            Selectionne 10 cartes pour construire un deck equilibre avant le
-            debut du combat.
+            Sélectionne 10 cartes pour construire un deck équilibre avant le
+            début du combat.
           </p>
         </div>
 
@@ -214,7 +213,7 @@ export default function DeckPage() {
           </Typography>
 
           <p className="deck-summary-count">
-            Cartes selectionnees: {selected.length} / 10
+            Cartes sélectionnées: {selected.length} / 10
           </p>
 
           <div className="summary-thumbs">
@@ -251,81 +250,82 @@ export default function DeckPage() {
         <div className="deck-layout">
           <div className="deck-main-panel">
             <div className="deck-toolbar">
-            <div className="deck-toolbar-left">
-              <TextField
-                size="small"
-                placeholder="Rechercher un personnage"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") onSearch();
-                }}
-                sx={{ width: 320 }}
-                className="deck-search"
-              />
-              <Button
-                size="small"
-                variant="outlined"
-                onClick={onSearch}
-                disabled={isSearching || loading}
-                className="deck-toolbar-btn"
-              >
-                Rechercher
-              </Button>
-              <Button
-                size="small"
-                onClick={() => {
-                  setQuery("");
-                  setPage(1);
-                  setCards([]);
-                }}
-                disabled={loading}
-                sx={{ ml: 1 }}
-                className="deck-toolbar-btn deck-toolbar-btn--plain"
-              >
-                Réinitialiser
-              </Button>
-            </div>
-
-            <div className="deck-toolbar-right">
-              <Typography
-                variant="subtitle2"
-                component="div"
-                className="deck-counter"
-              >
-                Cartes affichées: {cards.length}
-              </Typography>
-              <Button
-                size="small"
-                onClick={loadMore}
-                disabled={loading || !!query}
-                className="deck-toolbar-btn"
-              >
-                Charger plus
-              </Button>
-            </div>
-          </div>
-
-          {loading ? (
-            <p className="deck-loading">Chargement...</p>
-          ) : (
-            <Grid container>
-              <div className="cards-wrap">
-                {cards.map((c) => (
-                  <Cartes
-                    key={c.id}
-                    card={c}
-                    onAdd={handleAdd}
-                    onRemove={handleRemove}
-                    inDeck={selected.includes(String(c.id))}
-                    disabled={
-                      selected.length >= 10 && !selected.includes(String(c.id))
-                    } // ✅ MODIF
-                  />
-                ))}
+              <div className="deck-toolbar-left">
+                <TextField
+                  size="small"
+                  placeholder="Rechercher un personnage"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") onSearch();
+                  }}
+                  sx={{ width: 320 }}
+                  className="deck-search"
+                />
+                <Button
+                  size="small"
+                  variant="outlined"
+                  onClick={onSearch}
+                  disabled={isSearching || loading}
+                  className="deck-toolbar-btn"
+                >
+                  Rechercher
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    setQuery("");
+                    setPage(1);
+                    setCards([]);
+                  }}
+                  disabled={loading}
+                  sx={{ ml: 1 }}
+                  className="deck-toolbar-btn deck-toolbar-btn--plain"
+                >
+                  Réinitialiser
+                </Button>
               </div>
-            </Grid>
-          )}
+
+              <div className="deck-toolbar-right">
+                <Typography
+                  variant="subtitle2"
+                  component="div"
+                  className="deck-counter"
+                >
+                  Cartes affichées: {cards.length}
+                </Typography>
+                <Button
+                  size="small"
+                  onClick={loadMore}
+                  disabled={loading || !!query}
+                  className="deck-toolbar-btn"
+                >
+                  Charger plus
+                </Button>
+              </div>
+            </div>
+
+            {loading ? (
+              <p className="deck-loading">Chargement...</p>
+            ) : (
+              <Grid container>
+                <div className="cards-wrap">
+                  {cards.map((c) => (
+                    <Cartes
+                      key={c.id}
+                      card={c}
+                      onAdd={handleAdd}
+                      onRemove={handleRemove}
+                      inDeck={selected.includes(String(c.id))}
+                      disabled={
+                        selected.length >= 10 &&
+                        !selected.includes(String(c.id))
+                      }
+                    />
+                  ))}
+                </div>
+              </Grid>
+            )}
           </div>
         </div>
       </div>

@@ -166,7 +166,7 @@ export function computeWinner(game) {
     return { ...game, status: "finished", winner: game.playerA.uid };
   }
 
-  // Conformément au PDF : match nul si les deux joueurs n'ont plus de cartes sur le terrain
+  // Match nul si les deux joueurs n'ont plus de cartes sur le terrain
   const aBoardEmpty = (game.playerA.board || []).length === 0;
   const bBoardEmpty = (game.playerB.board || []).length === 0;
 

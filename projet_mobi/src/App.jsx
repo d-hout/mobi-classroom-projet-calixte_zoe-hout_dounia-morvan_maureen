@@ -14,8 +14,6 @@ export default function App() {
 
   return (
     <CounterContextProvider>
-      {/* BrowserRouter doit être dans main.jsx — ne pas le dupliquer ici */}
-      {/* ...existing layout... */}
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <LoginPage />} />
 
@@ -27,8 +25,6 @@ export default function App() {
         <Route path="/game/:gameId" element={<GamePage />} />
 
         <Route path="/battle/:gameId" element={<GamePage />} />
-
-        {/* Route /lobby removed - LobbyPage deleted, use HomePage to create/join directly */}
       </Routes>
     </CounterContextProvider>
   );

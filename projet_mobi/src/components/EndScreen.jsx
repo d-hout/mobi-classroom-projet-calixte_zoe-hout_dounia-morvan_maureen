@@ -1,7 +1,9 @@
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 export default function EndScreen({ game, currentUser }) {
   if (!game) return <div>Chargement...</div>;
+  const navigate = useNavigate();
 
   let message = "";
 
@@ -17,14 +19,7 @@ export default function EndScreen({ game, currentUser }) {
     <div className="end-screen">
       <h1>Fin de partie</h1>
       <h2>{message}</h2>
-      <button
-        onClick={async () => {
-          const newGameId = await createGame(currentUser);
-          navigate(`/game/${newGameId}`);
-        }}
-      >
-        Rejouer
-      </button>
+      <button onClick={() => navigate("/")}>Rejouer</button>
     </div>
   );
 }

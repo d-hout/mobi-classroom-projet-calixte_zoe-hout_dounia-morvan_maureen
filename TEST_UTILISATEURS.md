@@ -1,0 +1,35 @@
+# TESTS UTILISATEURS
+> **Documentation Projet Développement Mobile **
+
+## TEST 1
+👥 Erwan
+Points positifs : 
+- Le design des attaques et bien fait 
+Points négatifs : 
+- Bug dans la fonctionnalité "Réinitialiser le deck". 
+- Bouton "Charger Plus" supprime les cartes selectionnées et retourne un deck vide (ou plein si le joueur a déjà sauvegardé dans une partie précédente)
+- Design des pv peut être plus joli => Avec des coeurs simulant des vies
+
+=> Ajustements effectués sur tout les points négatifs
+---
+
+## TEST 2
+👥 Thibert
+Points positifs : 
+- Design sympa/agréable et assez responsive
+Points négatifs : 
+- Bug possibilité de rejouer
+- Voir la carte précise que joue l'adversaire pour permettre d'adapter sa stratégie de jeu et sa défense
+
+=> Correction bouton "Rejouer" seulement
+---
+
+## TEST 3
+👥 
+Points positifs : 
+- 
+Points négatifs : 
+- 
+
+=>
+---

@@ -93,9 +93,8 @@ export default function BattleArena({
                   className="ba-card-image"
                 />
                 <div className="ba-card-title">{card.name || card.id}</div>
-                <div className="ba-card-stats">
-                  ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
-                </div>
+                <div className="ba-card-stats">ATK {card.atk ?? "-"}</div>
+                <div className="ba-card-stats">DEF {card.def ?? "-"}</div>
               </div>
             ))
           )}
@@ -135,9 +134,8 @@ export default function BattleArena({
                   className="ba-card-image"
                 />
                 <div className="ba-card-title">{card.name || card.id}</div>
-                <div className="ba-card-stats">
-                  ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
-                </div>
+                <div className="ba-card-stats">ATK {card.atk ?? "-"}</div>
+                <div className="ba-card-stats">DEF {card.def ?? "-"}</div>
               </button>
             ))
           )}

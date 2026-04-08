@@ -603,7 +603,9 @@
   }
 
   .ba-board {
-    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, 105px); /* taille fixe */
+    justify-content: center; /* centre le grid */
     gap: 10px;
   }
 
@@ -612,13 +614,12 @@
     gap: 18px;
     justify-content: center;
     margin-bottom: 26px;
-    flex-wrap: wrap; 
+    flex-wrap: nowrap; 
   }
 
   .ba-pv {
-    flex: 1 1 200px; 
-    max-width: 320px;
-    box-sizing: border-box;
+    flex: 1; 
+    max-width: none;
   }
 
   .ba-card {

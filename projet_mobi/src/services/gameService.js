@@ -193,9 +193,18 @@ export async function lockDeckForGame(gameId, user, selectedDeckIds) {
     throw new Error("Tu ne fais pas partie de cette partie");
   }
 
+  // s'assurer que le deck contient exactement cartes
+  if (!Array.isArray(selectedDeckIds) || selectedDeckIds.length !== 10) {
+    throw new Error("Le deck doit contenir exactement 10 cartes (serveur)");
+  }
+
   const combatDeckCards = await buildDeckCardsFromIds(
     selectedDeckIds.map(String),
   );
+
+  if (!Array.isArray(combatDeckCards) || combatDeckCards.length !== 10) {
+    throw new Error("Cartes du deck invalides ou manquantes (serveur)");
+  }
 
   const playerState = createInitialPlayerState(
     uid,

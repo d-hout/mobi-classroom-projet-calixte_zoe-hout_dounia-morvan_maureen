@@ -53,8 +53,11 @@ export default function DeckPage() {
       .catch((err) => console.error("fetchLocalDisneyCharacters", err))
       .finally(() => mounted && setLoading(false));
 
+    // Charger le deck sauvegardé uniquement si on n'est PAS en contexte de partie
+    // (gameId présent signifie qu'on veut repartir d'un deck vide pour cette partie).
     async function loadDeck() {
       if (!uid) return;
+      if (gameId) return; // <-- empêcher le chargement du deck global quand on est dans une partie
       try {
         const cards = await getUserDeck(uid);
         setSelected(cards);
@@ -68,8 +71,34 @@ export default function DeckPage() {
     return () => {
       mounted = false;
     };
-  }, [uid, page, query]);
+  }, [uid, page, query, gameId]);
 
+  // Réinitialiser le deck à chaque connexion à une partie (gameId présent)
+  // sinon charger le deck sauvegardé localement
+  useEffect(() => {
+    if (!uid) return;
+
+    if (gameId) {
+      // À chaque fois qu'on accède à une partie, on part d'un deck vide
+      setSelected([]);
+      return;
+    }
+
+    let mounted = true;
+    (async function loadSavedDeck() {
+      try {
+        const cards = await getUserDeck(uid);
+        if (!mounted) return;
+        setSelected(cards || []);
+      } catch (err) {
+        console.warn("loadDeck ignoré :", err.message);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [uid, gameId]);
   // Verifie si les 2 decks sont prêts
   useEffect(() => {
     if (!gameId) return;

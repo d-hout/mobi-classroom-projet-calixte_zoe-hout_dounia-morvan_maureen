@@ -9,6 +9,7 @@ Points négatifs :
 - Bug dans la fonctionnalité "Réinitialiser le deck". 
 - Bouton "Charger Plus" supprime les cartes selectionnées et retourne un deck vide (ou plein si le joueur a déjà sauvegardé dans une partie précédente)
 - Design des pv peut être plus joli => Avec des coeurs simulant des vies
+- Afficher le nombre de carte restants dans le deck
 
 => Ajustements effectués sur tout les points négatifs
 ---
@@ -31,8 +32,9 @@ Points positifs :
 Points négatifs : 
 - Pas top de devoir scroller sur la page de jeu, ça aurait été mieux d'avoir une page fixe
 - Pas très équilibré les attaques et défenses
+- Ne pas voir les cartes de l'adversaire sinon le jeu est trop simple
 
-=>
+=> Modification de l'interface du jeu
 ---
 
 ## TEST 4
@@ -44,5 +46,5 @@ Points négatifs :
 - Bouton Deck navbar pas fonctionnel
 - Mettre moins de cartes
 
-=> Faire l'onglet Deck dans la navbar car utile
+=> Finaliser l'onglet Deck dans la navbar
 ---

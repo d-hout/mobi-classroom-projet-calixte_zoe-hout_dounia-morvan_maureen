@@ -25,11 +25,24 @@ Points négatifs :
 ---
 
 ## TEST 3
-👥 
+👥 Emmy
 Points positifs : 
-- 
+- Design sympa et propre
 Points négatifs : 
-- 
+- Pas top de devoir scroller sur la page de jeu, ça aurait été mieux d'avoir une page fixe
+- Pas très équilibré les attaques et défenses
 
 =>
+---
+
+## TEST 4
+👥 Baptiste
+Points positifs : 
+- Super de voir les parties en cours et de pouvoir s'inscrire
+- Très beau UX design
+Points négatifs : 
+- Bouton Deck navbar pas fonctionnel
+- Mettre moins de cartes
+
+=> Faire l'onglet Deck dans la navbar car utile
 ---

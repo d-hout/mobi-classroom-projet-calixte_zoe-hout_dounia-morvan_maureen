@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { observeAuth } from "./services/authService";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import CounterContextProvider from "./assets/counterContext";
@@ -10,7 +8,11 @@ import LoginPage from "./pages/LoginPage";
 import { useAuth } from "./hooks/useAuth";
 
 export default function App() {
-  const { user } = useAuth(); // récupère l'utilisateur connecté
+  const { user, loading } = useAuth(); // récupère l'utilisateur connecté
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <CounterContextProvider>
@@ -22,9 +24,15 @@ export default function App() {
           element={user ? <DeckPage /> : <LoginPage />}
         />
 
-        <Route path="/game/:gameId" element={<GamePage />} />
+        <Route
+          path="/game/:gameId"
+          element={user ? <GamePage /> : <LoginPage />}
+        />
 
-        <Route path="/battle/:gameId" element={<GamePage />} />
+        <Route
+          path="/battle/:gameId"
+          element={user ? <GamePage /> : <LoginPage />}
+        />
       </Routes>
     </CounterContextProvider>
   );

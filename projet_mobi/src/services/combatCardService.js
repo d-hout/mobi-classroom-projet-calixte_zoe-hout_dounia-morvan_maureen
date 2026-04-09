@@ -1,4 +1,4 @@
-import { get, ref, runTransaction } from "firebase/database";
+import { get, ref } from "firebase/database";
 import cards from "../data/disneyCards.json";
 import { getCombatStats } from "../game/cardStats";
 import { rtdb } from "./firebaseConfig";
@@ -28,18 +28,15 @@ function buildSharedCombatCardsCatalog() {
 
 export async function getSharedCombatCardsCatalog() {
   const catalogRef = ref(rtdb, SHARED_COMBAT_CARDS_PATH);
-  const snapshot = await get(catalogRef);
+  const localCatalog = buildSharedCombatCardsCatalog();
 
-  if (snapshot.exists()) {
-    return snapshot.val();
+  try {
+    const snapshot = await get(catalogRef);
+    return snapshot.exists() ? snapshot.val() : localCatalog;
+  } catch (error) {
+    console.warn("[combatCardService] shared catalog read failed:", error);
+    return localCatalog;
   }
-
-  const initialCatalog = buildSharedCombatCardsCatalog();
-  const result = await runTransaction(catalogRef, (currentCatalog) => {
-    return currentCatalog || initialCatalog;
-  });
-
-  return result.snapshot?.val() || initialCatalog;
 }
 
 export async function getSharedCombatCardsList() {

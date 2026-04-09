@@ -10,21 +10,32 @@ import {
   joinGame,
   subscribeToOpenGames,
 } from "../services/gameService";
+import { useAuth } from "../hooks/useAuth";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [openGames, setOpenGames] = useState([]);
   const [joiningGameId, setJoiningGameId] = useState(null);
   const [showOpenGames, setShowOpenGames] = useState(false);
-  const currentUid = auth.currentUser?.uid;
+  const [openGamesError, setOpenGamesError] = useState("");
+  const currentUid = user?.uid;
   const otherPlayersGames = openGames.filter(
     (game) => game.playerAUser?.uid !== currentUid,
   );
 
   useEffect(() => {
-    const unsub = subscribeToOpenGames(setOpenGames);
+    if (!user) return;
+    const unsub = subscribeToOpenGames((games) => {
+      setOpenGamesError("");
+      setOpenGames(games);
+    }, () => {
+      setOpenGamesError(
+        "La liste des parties n'est pas accessible avec les règles actuelles.",
+      );
+    });
     return unsub;
-  }, []);
+  }, [user]);
 
   const handleCreateGame = async () => {
     try {
@@ -44,8 +55,8 @@ export default function HomePage() {
       if (!user) return alert("Utilisateur non connecté");
       setJoiningGameId(gameId);
 
-      await joinGame(gameId, user);
-      navigate(`/deck/${gameId}`);
+      const joinedGameId = await joinGame(gameId, user);
+      navigate(`/deck/${joinedGameId}`);
     } catch (err) {
       console.error("join game error", err);
       alert(err.message || "Erreur lors de la connexion à la partie");
@@ -101,8 +112,8 @@ export default function HomePage() {
 
               {otherPlayersGames.length === 0 ? (
                 <div className="home-open-games-empty">
-                  Aucune partie d'un autre joueur n'est disponible pour le
-                  moment.
+                  {openGamesError ||
+                    "Aucune partie d'un autre joueur n'est disponible pour le moment."}
                 </div>
               ) : (
                 <div className="home-open-games-list">

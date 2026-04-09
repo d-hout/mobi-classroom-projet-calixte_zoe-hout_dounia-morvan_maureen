@@ -1,15 +1,5 @@
 import React from "react";
-
-//  somme des ATK sur le board
-function boardPower(board = []) {
-  return (board || []).reduce((s, c) => s + (c.atk || 0), 0);
-}
-
-function getInitial(name) {
-  if (!name) return "?";
-  return name.trim().charAt(0).toUpperCase();
-}
-export { boardPower, getInitial };
+import { deckCountLabel, getInitial } from "./battleArenaUtils";
 
 export default function BattleArena({
   me,
@@ -22,20 +12,11 @@ export default function BattleArena({
 }) {
   const mustDefend = !!pendingAttack;
 
-  const opponentPower = boardPower(opponent?.board);
-  const myPower = boardPower(me?.board);
-
-  let terrainLabel = "Terrain";
-  if (opponentPower > myPower) terrainLabel = "Terrain défavorable";
-  else if (opponentPower < myPower) terrainLabel = "Terrain favorable";
-  else terrainLabel = "Terrain équilibré";
-
   return (
     <div className="ba-container">
       <header className="ba-header">
         <div>
           <h2 className="ba-title">Combat</h2>
-          <p className="ba-terrain">{terrainLabel}</p>
         </div>
 
         <p
@@ -62,6 +43,7 @@ export default function BattleArena({
           <span>
             {opponent?.name || "Joueur"} — {opponent?.hp ?? "-"} PV
           </span>
+          <span className="ba-deck-count">{deckCountLabel(opponent)}</span>
         </div>
         <div className="ba-pv">
           <div className="ba-avatar" aria-hidden="true">
@@ -75,6 +57,7 @@ export default function BattleArena({
           <span>
             {me?.name || "Joueur"} — {me?.hp ?? "-"} PV
           </span>
+          <span className="ba-deck-count">{deckCountLabel(me)}</span>
         </div>
       </section>
 
@@ -94,8 +77,6 @@ export default function BattleArena({
                   className="ba-card-image"
                 />
                 <div className="ba-card-title">{card.name || card.id}</div>
-                <div className="ba-card-stats">ATK {card.atk ?? "-"}</div>
-                <div className="ba-card-stats">DEF {card.def ?? "-"}</div>
               </div>
             ))
           )}

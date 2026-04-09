@@ -1,13 +1,83 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginWithGoogle } from "../services/authService";
 import googleLogo from "../assets/logo-google.png";
 import "./loginPage.css";
-import minnieImg from "../assets/minie.jpg";
-import simbaImg from "../assets/simba.jpg";
+import {
+  fetchLocalDisneyCharacters,
+  searchLocalDisneyCharacters,
+} from "../services/localDisneyService";
+import { enrichCardsWithSharedCombatStats } from "../services/combatCardService";
+import { getDisplayImageUrl, handleImageError } from "../utils/imageUtils";
+
+function getCardSource(card) {
+  const sources = [
+    ...(card?.films || []),
+    ...(card?.shortFilms || []),
+    ...(card?.tvShows || []),
+  ];
+
+  return sources[0] || "Univers Disney";
+}
+
+function LoginPreviewCard({ card, variant }) {
+  if (!card) return null;
+
+  return (
+    <div className={`preview-card preview-card--${variant}`}>
+      <div className="preview-image">
+        <img
+          src={getDisplayImageUrl(card.image)}
+          alt={card.name}
+          onError={handleImageError}
+        />
+      </div>
+      <h3>{card.name}</h3>
+      <p>{getCardSource(card)}</p>
+      <div className="stats-row">
+        <span>ATK {card.atk ?? "-"}</span>
+        <span>DEF {card.def ?? "-"}</span>
+      </div>
+    </div>
+  );
+}
 
 function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [featuredCards, setFeaturedCards] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadFeaturedCards() {
+      try {
+        const [balooResults, belleResults] = await Promise.all([
+          searchLocalDisneyCharacters("Baloo"),
+          searchLocalDisneyCharacters("Belle"),
+        ]);
+        const preferredCards = [balooResults[0], belleResults[0]].filter(Boolean);
+        const fallbackCards =
+          preferredCards.length >= 2
+            ? preferredCards
+            : await fetchLocalDisneyCharacters(1, 2);
+
+        const enrichedCards = await enrichCardsWithSharedCombatStats(
+          fallbackCards.slice(0, 2),
+        );
+
+        if (mounted) setFeaturedCards(enrichedCards);
+      } catch (err) {
+        console.error("load login cards failed:", err);
+        if (mounted) setFeaturedCards([]);
+      }
+    }
+
+    loadFeaturedCards();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   async function handleLogin() {
     try {
@@ -60,29 +130,8 @@ function LoginPage() {
             <div className="bg-circle blue" />
             <div className="bg-circle yellow" />
 
-            <div className="mock-card minnie">
-              <div className="mock-image ">
-                <img src={minnieImg} alt="Minnie" />
-              </div>
-              <h3>Minnie</h3>
-              <p>Disney card</p>
-              <div className="stats-row">
-                <span>ATK 7</span>
-                <span>DEF 5</span>
-              </div>
-            </div>
-
-            <div className="mock-card simba">
-              <div className="mock-image">
-                <img src={simbaImg} alt="Simba" />
-              </div>
-              <h3>Simba</h3>
-              <p>Marvel hero card</p>
-              <div className="stats-row">
-                <span>ATK 9</span>
-                <span>DEF 6</span>
-              </div>
-            </div>
+            <LoginPreviewCard card={featuredCards[0]} variant="primary" />
+            <LoginPreviewCard card={featuredCards[1]} variant="secondary" />
           </div>
         </div>
       </div>

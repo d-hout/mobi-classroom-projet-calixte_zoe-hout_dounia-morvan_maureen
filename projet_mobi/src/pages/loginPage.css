@@ -200,7 +200,7 @@
   top: 40px;
 }
 
-.mock-card {
+.preview-card {
   position: absolute;
   width: 250px;
   background: #ffffff;
@@ -211,17 +211,17 @@
   box-shadow: 0 18px 35px rgba(12, 20, 69, 0.12);
 }
 
-.mock-card.minnie {
+.preview-card--primary {
   left: 100px;
   top: 50px;
 }
 
-.mock-card.simba {
+.preview-card--secondary {
   right: 70px;
   top: 80px;
 }
 
-.mock-image {
+.preview-image {
   width: 100%;
   height: 250px;
   border-radius: 18px;
@@ -230,7 +230,7 @@
   margin-bottom: 14px;
 }
 
-.mock-image img {
+.preview-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -244,13 +244,13 @@
   background: #4da8ff;
 }
 
-.mock-card h3 {
+.preview-card h3 {
   margin: 0;
   font-size: 18px;
   color: #0c1445;
 }
 
-.mock-card p {
+.preview-card p {
   margin: 6px 0 14px;
   font-size: 13px;
   color: #5f6f9f;

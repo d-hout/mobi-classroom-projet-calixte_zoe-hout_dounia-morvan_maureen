@@ -4,13 +4,15 @@ import { auth } from '../services/firebaseConfig';
 
 export function useAuth() {
   const [user, setUser] = useState(auth.currentUser);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (nextUser) => {
       setUser(nextUser);
+      setLoading(false);
     });
     return unsubscribe;
   }, []);
 
-  return { user };
+  return { user, loading };
 }

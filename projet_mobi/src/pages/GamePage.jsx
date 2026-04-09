@@ -14,10 +14,10 @@ export default function GamePage() {
 
   // Ecouter la partie active
   useEffect(() => {
-    if (!gameId) return;
+    if (!gameId || !user) return;
     const unsub = subscribeToGame(gameId, setGame);
     return unsub;
-  }, [gameId]);
+  }, [gameId, user]);
 
   if (!game || !user) {
     return (

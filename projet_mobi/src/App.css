@@ -347,7 +347,8 @@ a {
 
 .deck-toolbar {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
   gap: 18px;
   margin-bottom: 18px;
@@ -365,6 +366,10 @@ a {
   background: rgba(255, 250, 240, 0.96);
 }
 
+.deck-search {
+  width: min(100%, 320px);
+}
+
 .deck-toolbar-btn {
   border-radius: 999px !important;
   color: #fff3cd !important;
@@ -379,6 +384,13 @@ a {
   color: #d8e6ff !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
+}
+
+.card-search-count {
+  margin-left: auto;
+  color: #d8e6ff;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .deck-loading {
@@ -420,10 +432,21 @@ a {
 
 .card-name {
   min-height: 40px;
+  margin: 0;
   color: #fff3cd;
   font-size: 0.98rem;
   font-weight: 700;
   line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.card-source {
+  min-height: 40px;
+  margin: 8px 0 0;
+  color: #c8d8fb;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .card-stats {
@@ -494,9 +517,83 @@ a {
   margin-top: 18px;
 }
 
+.collection-page {
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background:
+    linear-gradient(180deg, rgba(8, 19, 37, 0.3), rgba(8, 19, 37, 0.72)),
+    radial-gradient(circle at top right, rgba(246, 207, 113, 0.08), transparent 24%);
+}
+
+.collection-shell {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+}
+
+.collection-hero {
+  margin: 28px 0 22px;
+}
+
+.collection-hero h1 {
+  margin: 0 0 14px;
+  color: var(--app-cream);
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  line-height: 1;
+}
+
+.collection-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.collection-search {
+  width: min(100%, 360px);
+}
+
+.collection-search .MuiOutlinedInput-root {
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.96);
+}
+
+.collection-loading {
+  color: #fff3cd;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.collection-grid .card-tile {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.collection-grid .card-media {
+  height: auto;
+  aspect-ratio: 4 / 5;
+}
+
+.collection-grid .card-body {
+  min-height: 132px;
+}
+
+.collection-grid .card-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+}
+
 @media (max-width: 960px) {
   .home-page,
-  .deck-page {
+  .deck-page,
+  .collection-page {
     padding: 14px;
   }
 
@@ -519,8 +616,14 @@ a {
   }
 
   .deck-toolbar-left,
-  .deck-toolbar-right {
+  .deck-toolbar-right,
+  .collection-toolbar {
     flex-wrap: wrap;
+  }
+
+  .card-search-count {
+    width: 100%;
+    margin-left: 0;
   }
 }
 

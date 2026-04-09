@@ -60,11 +60,10 @@ export default function Header() {
 
           <div>
             <IconButton
+              component={Link}
+              to="/collection"
               size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleClose}
+              aria-label="collection de cartes"
               color="inherit"
               className="app-header-icon"
             >

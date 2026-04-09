@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import DeckPage from "./pages/DeckPage";
 import GamePage from "./pages/GamePage";
 import LoginPage from "./pages/LoginPage";
+import CollectionPage from "./pages/CollectionPage";
 import { useAuth } from "./hooks/useAuth";
 
 export default function App() {
@@ -22,6 +23,11 @@ export default function App() {
         <Route
           path="/deck/:gameId"
           element={user ? <DeckPage /> : <LoginPage />}
+        />
+
+        <Route
+          path="/collection"
+          element={user ? <CollectionPage /> : <LoginPage />}
         />
 
         <Route

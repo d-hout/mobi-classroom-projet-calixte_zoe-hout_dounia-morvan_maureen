@@ -52,6 +52,8 @@ export async function enrichCardsWithSharedCombatStats(rawCards) {
 
   return (rawCards || []).map((card) => {
     const sharedCard = catalog?.[String(card.id)];
-    return sharedCard ? { ...card, atk: sharedCard.atk, def: sharedCard.def } : card;
+    return sharedCard
+      ? { ...card, atk: sharedCard.atk, def: sharedCard.def }
+      : card;
   });
 }

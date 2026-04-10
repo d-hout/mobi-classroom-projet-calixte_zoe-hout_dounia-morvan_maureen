@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 import BattleArena from "../components/game/BattleArena";
 import EndScreen from "../components/EndScreen";
 import { subscribeToGame, attack, defend } from "../services/gameService";
@@ -9,17 +11,53 @@ import Header from "../components/Header";
 
 export default function GamePage() {
   const { gameId } = useParams();
+  const navigate = useNavigate();
   const { user } = useAuth();
-  const [game, setGame] = useState(null);
+  const [gameState, setGameState] = useState({
+    game: undefined,
+    error: "",
+  });
 
   // Ecouter la partie active
   useEffect(() => {
     if (!gameId || !user) return;
-    const unsub = subscribeToGame(gameId, setGame);
+
+    const unsub = subscribeToGame(
+      gameId,
+      (nextGame) => {
+        setGameState({
+          game: nextGame,
+          error: "",
+        });
+      },
+      () => {
+        setGameState({
+          game: null,
+          error:
+            "La partie n'est pas accessible pour le moment à cause d'une erreur Firebase.",
+        });
+      },
+    );
+
     return unsub;
   }, [gameId, user]);
+  const { game, error: gameError } = gameState;
 
-  if (!game || !user) {
+  const accessError = useMemo(() => {
+    if (!user || !game) return "";
+
+    const playerIds = [game.playerAUser?.uid, game.playerBUser?.uid].filter(
+      Boolean,
+    );
+
+    if (playerIds.length > 0 && !playerIds.includes(user.uid)) {
+      return "Tu n'es pas autorisé à accéder à cette partie.";
+    }
+
+    return "";
+  }, [game, user]);
+
+  if (!user || (game === undefined && !gameError)) {
     return (
       <div className="game-page">
         <div className="game-shell game-shell--loading">
@@ -27,6 +65,39 @@ export default function GamePage() {
           <h1>Chargement de la partie...</h1>
           <p>Préparation du château, des cartes et de l'arène enchantée.</p>
         </div>
+      </div>
+    );
+  }
+
+  if (gameError || !game || accessError) {
+    return (
+      <div className="game-page">
+        <Header />
+        <section className="game-shell game-shell--waiting">
+          <div className="waiting-layout">
+            <div className="waiting-hero">
+              <p className="game-kicker">Disney Card Battle</p>
+              <h1>{!game ? "Partie introuvable" : "Accès impossible"}</h1>
+              <Alert
+                severity={gameError ? "error" : "warning"}
+                className="game-inline-alert"
+              >
+                {gameError ||
+                  accessError ||
+                  "La partie demandée n'existe plus ou n'est plus disponible."}
+              </Alert>
+              <div className="game-error-actions">
+                <Button
+                  variant="contained"
+                  className="bouton-blue"
+                  onClick={() => navigate("/")}
+                >
+                  Retour à l'accueil
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
@@ -76,14 +147,14 @@ export default function GamePage() {
                   className={`waiting-step ${meReady ? "waiting-step--done" : ""}`}
                 >
                   <span className="waiting-step-dot" />
-                  Ton deck est {meReady ? "pret" : "en preparation"}
+                  Ton deck est {meReady ? "prêt" : "en préparation"}
                 </div>
                 <div
                   className={`waiting-step ${opponentReady ? "waiting-step--done" : ""}`}
                 >
                   <span className="waiting-step-dot" />
                   Le deck adverse est{" "}
-                  {opponentReady ? "pret" : "en preparation"}
+                  {opponentReady ? "prêt" : "en préparation"}
                 </div>
               </div>
 

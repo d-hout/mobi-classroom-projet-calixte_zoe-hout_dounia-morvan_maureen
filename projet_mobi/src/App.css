@@ -129,6 +129,10 @@ a {
   color: var(--app-cream);
 }
 
+.not-found-shell {
+  align-items: flex-start;
+}
+
 .home-actions {
   display: flex;
   flex-wrap: wrap;
@@ -161,6 +165,39 @@ a {
   border-radius: 18px;
   background: rgba(8, 19, 37, 0.5);
   color: #e6efff;
+}
+
+.page-inline-error {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 125, 125, 0.32);
+  border-radius: 18px;
+  background: rgba(111, 14, 28, 0.28);
+  color: #ffe0e5;
+  line-height: 1.5;
+}
+
+.deck-summary-hint {
+  margin: 10px 0 0;
+  color: #dce8ff;
+  line-height: 1.5;
+}
+
+.card-media {
+  position: relative;
+}
+
+.card-media-badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(8, 19, 37, 0.82);
+  color: #fff6d8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .home-open-games-list {

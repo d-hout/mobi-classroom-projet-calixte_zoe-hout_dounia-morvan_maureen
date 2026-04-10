@@ -67,6 +67,15 @@
   min-height: 72vh;
 }
 
+.game-inline-alert {
+  margin-top: 24px;
+  border-radius: 18px;
+}
+
+.game-error-actions {
+  margin-top: 22px;
+}
+
 .game-kicker {
   margin: 0 0 12px;
   color: #ffe7a8;

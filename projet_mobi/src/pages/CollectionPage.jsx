@@ -15,6 +15,7 @@ export default function CollectionPage() {
   const [cards, setCards] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
+  const [collectionError, setCollectionError] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -24,10 +25,18 @@ export default function CollectionPage() {
         setLoading(true);
         const list = await fetchLocalDisneyCharacters(1, 240);
         const enrichedCards = await enrichCardsWithSharedCombatStats(list);
-        if (mounted) setCards(enrichedCards);
+        if (mounted) {
+          setCollectionError("");
+          setCards(enrichedCards);
+        }
       } catch (error) {
         console.error("load collection failed:", error);
-        if (mounted) setCards([]);
+        if (mounted) {
+          setCollectionError(
+            "Impossible de charger la collection pour le moment.",
+          );
+          setCards([]);
+        }
       } finally {
         if (mounted) setLoading(false);
       }
@@ -63,6 +72,7 @@ export default function CollectionPage() {
 
     if (!term) {
       const list = await fetchLocalDisneyCharacters(1, 240);
+      setCollectionError("");
       setCards(await enrichCardsWithSharedCombatStats(list));
       return;
     }
@@ -70,9 +80,11 @@ export default function CollectionPage() {
     try {
       setLoading(true);
       const results = await searchLocalDisneyCharacters(term);
+      setCollectionError("");
       setCards(await enrichCardsWithSharedCombatStats(results));
     } catch (error) {
       console.error("collection search failed:", error);
+      setCollectionError("La recherche n'a pas pu aboutir.");
       setCards([]);
     } finally {
       setLoading(false);
@@ -85,9 +97,11 @@ export default function CollectionPage() {
     try {
       setLoading(true);
       const list = await fetchLocalDisneyCharacters(1, 240);
+      setCollectionError("");
       setCards(await enrichCardsWithSharedCombatStats(list));
     } catch (error) {
       console.error("collection reset failed:", error);
+      setCollectionError("Impossible de recharger la collection.");
       setCards([]);
     } finally {
       setLoading(false);
@@ -100,6 +114,11 @@ export default function CollectionPage() {
 
       <main className="collection-shell">
         <CollectionHero />
+        {collectionError && (
+          <p className="page-inline-error" role="alert">
+            {collectionError}
+          </p>
+        )}
         <CardSearchToolbar
           query={query}
           onQueryChange={setQuery}
@@ -117,6 +136,11 @@ export default function CollectionPage() {
           loading={loading}
           className="collection-grid"
           loadingClassName="collection-loading"
+          emptyText={
+            query.trim()
+              ? `Aucun résultat pour "${query.trim()}".`
+              : "Aucune carte n'est disponible dans la collection."
+          }
           renderCard={(card) => (
             <CardTile key={card.id} card={card} showSource />
           )}

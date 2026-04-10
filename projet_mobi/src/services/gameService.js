@@ -266,7 +266,7 @@ export function subscribeToOpenGames(callback, onError) {
   });
 }
 
-export function subscribeToGame(gameId, callback) {
+export function subscribeToGame(gameId, callback, onError) {
   const gameRef = ref(rtdb, `games/${gameId}`);
 
   return onValue(gameRef, (snapshot) => {
@@ -275,6 +275,10 @@ export function subscribeToGame(gameId, callback) {
     } else {
       callback(null);
     }
+  }, (error) => {
+    console.error("[subscribeToGame] read failed:", error);
+    callback(null);
+    if (onError) onError(error);
   });
 }
 

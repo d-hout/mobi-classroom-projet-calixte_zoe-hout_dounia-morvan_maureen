@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import "../App.css";
 import bg from "../assets/disney2.jpg";
 import { useNavigate } from "react-router-dom";
@@ -19,10 +21,30 @@ export default function HomePage() {
   const [joiningGameId, setJoiningGameId] = useState(null);
   const [showOpenGames, setShowOpenGames] = useState(false);
   const [openGamesError, setOpenGamesError] = useState("");
+  const [feedback, setFeedback] = useState({
+    open: false,
+    message: "",
+    severity: "error",
+  });
   const currentUid = user?.uid;
   const otherPlayersGames = openGames.filter(
     (game) => game.playerAUser?.uid !== currentUid,
   );
+
+  const showFeedback = (message, severity = "error") => {
+    setFeedback({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseFeedback = () => {
+    setFeedback((current) => ({
+      ...current,
+      open: false,
+    }));
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -40,26 +62,32 @@ export default function HomePage() {
   const handleCreateGame = async () => {
     try {
       const user = auth.currentUser;
-      if (!user) return alert("Utilisateur non connecté");
+      if (!user) {
+        showFeedback("Utilisateur non connecté.");
+        return;
+      }
       const gameId = await createGame(user); // Crée une partie vide
       navigate(`/deck/${gameId}`);
     } catch (err) {
       console.error("create game error", err);
-      alert(err.message || "Erreur lors de la création de la partie");
+      showFeedback(err.message || "Erreur lors de la création de la partie.");
     }
   };
 
   const handleJoinGame = async (gameId) => {
     try {
       const user = auth.currentUser;
-      if (!user) return alert("Utilisateur non connecté");
+      if (!user) {
+        showFeedback("Utilisateur non connecté.");
+        return;
+      }
       setJoiningGameId(gameId);
 
       const joinedGameId = await joinGame(gameId, user);
       navigate(`/deck/${joinedGameId}`);
     } catch (err) {
       console.error("join game error", err);
-      alert(err.message || "Erreur lors de la connexion à la partie");
+      showFeedback(err.message || "Erreur lors de la connexion à la partie.");
     } finally {
       setJoiningGameId(null);
     }
@@ -129,7 +157,7 @@ export default function HomePage() {
                         disabled={isJoining}
                       >
                         <div className="home-game-card-top">
-                          <span className="home-game-card-label">Hote</span>
+                          <span className="home-game-card-label">Hôte</span>
                           <span className="home-game-card-status">
                             Disponible
                           </span>
@@ -154,6 +182,22 @@ export default function HomePage() {
           )}
         </section>
       </div>
+
+      <Snackbar
+        open={feedback.open}
+        autoHideDuration={4000}
+        onClose={handleCloseFeedback}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseFeedback}
+          severity={feedback.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {feedback.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

@@ -1,5 +1,10 @@
+import { useState } from "react";
 import Button from "@mui/material/Button";
-import { getDisplayImageUrl, handleImageError } from "../../utils/imageUtils";
+import {
+  getDisplayImageUrl,
+  handleImageError,
+  isUsableImageUrl,
+} from "../../utils/imageUtils";
 
 function getCardSource(card) {
   const sources = [
@@ -21,6 +26,8 @@ export default function CardTile({
 }) {
   const sourceText = getCardSource(card);
   const hasDeckAction = onAdd || onRemove;
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
+  const imageUnavailable = !isUsableImageUrl(card.image) || imageLoadFailed;
 
   return (
     <article className="card-tile">
@@ -28,8 +35,14 @@ export default function CardTile({
         <img
           src={getDisplayImageUrl(card.image)}
           alt={card.name}
-          onError={handleImageError}
+          onError={(event) => {
+            setImageLoadFailed(true);
+            handleImageError(event);
+          }}
         />
+        {imageUnavailable && (
+          <span className="card-media-badge">Image indisponible</span>
+        )}
       </div>
       <div className="card-body">
         <h2 className="card-name">{card.name}</h2>

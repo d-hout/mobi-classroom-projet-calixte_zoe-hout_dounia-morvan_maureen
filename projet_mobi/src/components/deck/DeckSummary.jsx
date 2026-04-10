@@ -3,7 +3,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { getDisplayImageUrl, handleImageError } from "../../utils/imageUtils";
 
-export default function DeckSummary({ cards, selected, saving, onSave }) {
+export default function DeckSummary({
+  cards,
+  selected,
+  saving,
+  onSave,
+  validationMessage = "",
+}) {
   return (
     <Paper
       elevation={2}
@@ -21,6 +27,11 @@ export default function DeckSummary({ cards, selected, saving, onSave }) {
       <p className="deck-summary-count">
         Cartes sélectionnées: {selected.length} / 10
       </p>
+      {validationMessage && (
+        <p className="deck-summary-hint" role="status">
+          {validationMessage}
+        </p>
+      )}
 
       <div className="summary-thumbs">
         {selected.map((id) => {

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import Alert from "@mui/material/Alert";
 import Header from "../components/Header";
+import Snackbar from "@mui/material/Snackbar";
 import DeckCardPicker from "../components/deck/DeckCardPicker";
 import DeckHero from "../components/deck/DeckHero";
 import DeckLobby from "../components/deck/DeckLobby";
@@ -23,11 +25,32 @@ export default function DeckPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [game, setGame] = useState(null); // Permet de suivre l'état de la partie
   const [saving, setSaving] = useState(false); // Eviter les doubles clics
+  const [collectionError, setCollectionError] = useState("");
+  const [feedback, setFeedback] = useState({
+    open: false,
+    message: "",
+    severity: "info",
+  });
   const pageSize = 48;
   const uid = auth?.currentUser?.uid;
 
   const navigate = useNavigate();
   const { gameId } = useParams();
+
+  const showFeedback = (message, severity = "error") => {
+    setFeedback({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  const handleCloseFeedback = () => {
+    setFeedback((current) => ({
+      ...current,
+      open: false,
+    }));
+  };
 
   useEffect(() => {
     if (query && query.trim().length > 0) return;
@@ -39,13 +62,21 @@ export default function DeckPage() {
       .then((list) => enrichCardsWithSharedCombatStats(list))
       .then((list) => {
         if (!mounted) return;
+        setCollectionError("");
         setCards((prev) => {
           const existing = new Set(prev.map((c) => String(c.id)));
           const toAdd = (list || []).filter((c) => !existing.has(String(c.id)));
           return page === 1 ? list || [] : [...prev, ...toAdd];
         });
       })
-      .catch((err) => console.error("fetchLocalDisneyCharacters", err))
+      .catch((err) => {
+        console.error("fetchLocalDisneyCharacters", err);
+        if (!mounted) return;
+        setCollectionError(
+          "Impossible de charger les cartes pour le moment. Vérifie la source locale ou réessaie plus tard.",
+        );
+        setCards([]);
+      })
       .finally(() => mounted && setLoading(false));
 
     // Charger le deck sauvegardé uniquement si on n'est PAS en contexte de partie
@@ -113,10 +144,17 @@ export default function DeckPage() {
     setSelected((s) => s.filter((id) => id !== String(cardId)));
 
   const handleSave = async () => {
-    if (!uid) return alert("Connecte-toi d'abord.");
-    if (!gameId) return alert("Aucune partie sélectionnée.");
+    if (!uid) {
+      showFeedback("Connecte-toi d'abord.");
+      return;
+    }
+    if (!gameId) {
+      showFeedback("Aucune partie sélectionnée.");
+      return;
+    }
     if (selected.length !== 10) {
-      return alert("Le deck doit contenir exactement 10 cartes.");
+      showFeedback("Le deck doit contenir exactement 10 cartes.");
+      return;
     }
 
     try {
@@ -125,11 +163,13 @@ export default function DeckPage() {
       await saveUserDeck(uid, selected);
       await lockDeckForGame(gameId, auth.currentUser, selected);
 
-      alert("Deck sauvegardé pour la partie.");
-      navigate(`/game/${gameId}`);
+      showFeedback("Deck sauvegardé pour la partie.", "success");
+      window.setTimeout(() => {
+        navigate(`/game/${gameId}`);
+      }, 700);
     } catch (err) {
       console.error("save deck", err);
-      alert(err.message || "Erreur lors de la sauvegarde.");
+      showFeedback(err.message || "Erreur lors de la sauvegarde.");
     } finally {
       setSaving(false);
     }
@@ -152,9 +192,11 @@ export default function DeckPage() {
 
     try {
       const found = await searchLocalDisneyCharacters(term);
+      setCollectionError("");
       setCards(await enrichCardsWithSharedCombatStats(found));
     } catch (err) {
       console.error("search error", err);
+      setCollectionError("La recherche a échoué. Merci de réessayer.");
       setCards([]);
     } finally {
       setLoading(false);
@@ -172,13 +214,30 @@ export default function DeckPage() {
           cards={cards}
           selected={selected}
           saving={saving}
+          validationMessage={
+            selected.length === 10
+              ? "Ton deck est complet et prêt à être verrouillé."
+              : `Ton deck est incomplet. Ajoute encore ${10 - selected.length} carte${
+                  10 - selected.length > 1 ? "s" : ""
+                }.`
+          }
           onSave={handleSave}
         />
+        {collectionError && (
+          <p className="page-inline-error" role="alert">
+            {collectionError}
+          </p>
+        )}
         <DeckCardPicker
           cards={cards}
           selected={selected}
           loading={loading}
           isSearching={isSearching}
+          emptyText={
+            query.trim()
+              ? `Aucune carte ne correspond à "${query.trim()}".`
+              : "Aucune carte n'est disponible pour le moment."
+          }
           query={query}
           onQueryChange={setQuery}
           onSearch={onSearch}
@@ -192,6 +251,22 @@ export default function DeckPage() {
           onRemove={handleRemove}
         />
       </div>
+
+      <Snackbar
+        open={feedback.open}
+        autoHideDuration={4000}
+        onClose={handleCloseFeedback}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseFeedback}
+          severity={feedback.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {feedback.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

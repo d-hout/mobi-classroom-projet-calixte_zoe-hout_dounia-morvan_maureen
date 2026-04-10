@@ -8,6 +8,7 @@ export default function DeckCardPicker({
   selected,
   loading,
   isSearching,
+  emptyText,
   query,
   onQueryChange,
   onSearch,
@@ -46,6 +47,7 @@ export default function DeckCardPicker({
           loading={loading}
           className="cards-wrap"
           loadingClassName="deck-loading"
+          emptyText={emptyText}
           renderCard={(card) => (
             <CardTile
               key={card.id}

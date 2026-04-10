@@ -2,8 +2,8 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 
 export default function EndScreen({ game, currentUser }) {
-  if (!game) return <div>Chargement...</div>;
   const navigate = useNavigate();
+  if (!game) return <div>Chargement...</div>;
 
   let message = "";
 

@@ -6,6 +6,7 @@ import DeckPage from "./pages/DeckPage";
 import GamePage from "./pages/GamePage";
 import LoginPage from "./pages/LoginPage";
 import CollectionPage from "./pages/CollectionPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import { useAuth } from "./hooks/useAuth";
 
 export default function App() {
@@ -38,6 +39,11 @@ export default function App() {
         <Route
           path="/battle/:gameId"
           element={user ? <GamePage /> : <LoginPage />}
+        />
+
+        <Route
+          path="*"
+          element={user ? <NotFoundPage /> : <LoginPage />}
         />
       </Routes>
     </CounterContextProvider>

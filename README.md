@@ -35,13 +35,70 @@ Ce jeu permet aux joueurs de s'affronter en temps réel dans des duels stratégi
    git clone [https://github.com/ensc-mobi/mobi-classroom-projet-calixte_zoe-hout_dounia-morvan_maureen.git](https://github.com/ensc-mobi/mobi-classroom-projet-calixte_zoe-hout_dounia-morvan_maureen.git)
 2. **Se déplacer dans le répertoire de travail 
 cd projet_mobi
-3. Installer les dépendances et lancer l'application 
+
+3. Configurer Firebase
+Créer un projet Firebase et activer :
+- Firebase Authentication (Google Auth)
+- Realtime Database
+Ajouter ensuite la configuration Firebase dans les fichiers prévus du projet.
+
+4. Installer les dépendances et lancer l'application 
 npm install 
 npm run dev
-4. Observer le port du service avec l’adresse localhost : http://localhost:5173/
+
+5. Observer le port du service avec l’adresse localhost : http://localhost:5173/
 URL du site : 
 
 
-## tests unitaires 
-lancer les test 
-npm test 
+
+## Tests unitaires
+Les tests couvrant la logique de jeu (combat, calculs) et la constitution du deck sont disponibles dans le dossier `src/tests`.
+Vous pouvez les lancer avec : npm test -- --run
+ajouter lien du site dépolyé 
+mettre lien github de tout le monde
+
+## Fonctionnalités utilisateur 
+Un utilisateur peut :
+- se connecter avec Google ;
+- créer une partie ;
+- rejoindre une partie existante ;
+- constituer un deck de 10 cartes ;
+- lancer un combat contre un autre joueur ;
+- consulter une collection de cartes Disney.
+
+
+## Stack technique
+- React
+- Vite
+- React Router
+- Firebase Auth
+- Firebase Realtime Database
+- Firebase Firestore
+- Material UI
+- Vitest
+- Testing Library
+- ESLint
+
+## Structure du projet
+src/
+  components/     composants réutilisables
+  pages/          pages principales
+  services/       accès Firebase et logique de données
+  game/           logique métier du combat
+  hooks/          hooks personnalisés
+  data/           données locales des cartes
+
+tests/            tests unitaires et composants
+scripts/          scripts utilitaires
+
+
+## Qualité technique
+- séparation entre pages, composants, services et logique métier ;
+- hook dédié à l’authentification ;
+- tests automatisés ;
+- vérification de qualité avec ESLint ;
+- utilisation d’un moteur de jeu séparé de l’interface.
+
+
+
+

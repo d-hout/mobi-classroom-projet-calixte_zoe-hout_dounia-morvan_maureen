@@ -257,8 +257,8 @@
 }
 
 .stats-row {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  gap: 8px;
 }
 
 .stats-row span {

@@ -1,6 +1,28 @@
 import React from "react";
 import { deckCountLabel, getInitial } from "./battleArenaUtils";
 
+function HeartMeter({ hp }) {
+  const hearts = Math.max(0, Number(hp) || 0);
+
+  if (!Number.isFinite(Number(hp))) {
+    return <span className="ba-hearts">-</span>;
+  }
+
+  return (
+    <span
+      className="ba-hearts"
+      aria-label={`${hearts} coeur${hearts > 1 ? "s" : ""}`}
+      title={`${hearts} coeur${hearts > 1 ? "s" : ""}`}
+    >
+      {Array.from({ length: hearts }, (_, index) => (
+        <span className="ba-heart" aria-hidden="true" key={index}>
+          ❤️
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function BattleArena({
   me,
   opponent,
@@ -40,9 +62,8 @@ export default function BattleArena({
             </span>
           </div>
           <strong>Adversaire</strong>
-          <span>
-            {opponent?.name || "Joueur"} — {opponent?.hp ?? "-"} PV
-          </span>
+          <span>{opponent?.name || "Joueur"}</span>
+          <HeartMeter hp={opponent?.hp} />
           <span className="ba-deck-count">{deckCountLabel(opponent)}</span>
         </div>
         <div className="ba-pv">
@@ -54,9 +75,8 @@ export default function BattleArena({
             </span>
           </div>
           <strong>Moi</strong>
-          <span>
-            {me?.name || "Joueur"} — {me?.hp ?? "-"} PV
-          </span>
+          <span>{me?.name || "Joueur"}</span>
+          <HeartMeter hp={me?.hp} />
           <span className="ba-deck-count">{deckCountLabel(me)}</span>
         </div>
       </section>
@@ -88,7 +108,7 @@ export default function BattleArena({
           <p>
             ⚔️ Attaque de : <strong>{pendingAttack.attackerCard?.name}</strong>
           </p>
-          <p>ATK : {pendingAttack.attackerCard?.atk}</p>
+          <p>Attaque : {pendingAttack.attackerCard?.atk}</p>
         </div>
       )}
 
@@ -116,8 +136,8 @@ export default function BattleArena({
                   className="ba-card-image"
                 />
                 <div className="ba-card-title">{card.name || card.id}</div>
-                <div className="ba-card-stats">ATK {card.atk ?? "-"}</div>
-                <div className="ba-card-stats">DEF {card.def ?? "-"}</div>
+                <div className="ba-card-stats">Attaque {card.atk ?? "-"}</div>
+                <div className="ba-card-stats">Défense {card.def ?? "-"}</div>
               </button>
             ))
           )}
@@ -131,7 +151,7 @@ export default function BattleArena({
             className="ba-btn ba-btn--danger"
             onClick={onTakeHit}
           >
-            💥 Encaisser le coup (-1 PV)
+            💥 Encaisser le coup (-1 cœur)
           </button>
         </div>
       )}

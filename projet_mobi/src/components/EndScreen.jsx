@@ -19,7 +19,10 @@ export default function EndScreen({ game, currentUser }) {
     <div className="end-screen">
       <h1>Fin de partie</h1>
       <h2>{message}</h2>
-      <button onClick={() => navigate("/")}>Rejouer</button>
+      <div className="end-screen-actions">
+        <button onClick={() => navigate("/")}>Rejouer</button>
+        <button onClick={() => navigate("/")}>Retourner à l'accueil</button>
+      </div>
     </div>
   );
 }

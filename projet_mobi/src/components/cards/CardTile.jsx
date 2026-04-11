@@ -50,7 +50,8 @@ export default function CardTile({
           <p className="card-source">{sourceText || "Univers Disney"}</p>
         )}
         <div className="card-stats">
-          ATK {card.atk ?? "-"} / DEF {card.def ?? "-"}
+          <span>Attaque {card.atk ?? "-"}</span>
+          <span>Défense {card.def ?? "-"}</span>
         </div>
 
         {hasDeckAction && (

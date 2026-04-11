@@ -85,7 +85,7 @@ export function declareAttack(game, attackerPlayerKey, attackerCardId) {
 }
 
 // Résoudre la défense (avec validations)
-// defenderCardId = null signifie 'prendre le coup' (-1 PV)
+// defenderCardId = null signifie "prendre le coup" et perdre une vie.
 // Retour: nouvel état de la partie après résolution et fin de tour.
 export function resolveDefense(game, defenderCardId = null) {
   if (!game || !game.pendingAttack)
@@ -139,7 +139,7 @@ export function resolveDefense(game, defenderCardId = null) {
     discard: [...(defender.discard || []), defenderCard],
   };
 
-  // Comparer ATK / DEF et ajuster PV du défenseur
+  // Comparer l'attaque et la défense pour ajuster les vies du défenseur.
   if ((attackerCard.atk || 0) > (defenderCard.def || 0)) {
     newDefender.hp = Math.max(0, (defender.hp || 0) - 1);
   }

@@ -342,6 +342,21 @@
   font-size: 0.98rem;
 }
 
+.ba-pv .ba-hearts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+  color: #d8345f;
+  line-height: 1;
+}
+
+.ba-heart {
+  display: inline-flex;
+  font-size: 1.15rem;
+  filter: drop-shadow(0 2px 2px rgba(120, 22, 44, 0.22));
+}
+
 .ba-pv .ba-deck-count {
   display: block;
   margin-top: 8px;
@@ -685,4 +700,26 @@
   height: 75vh;
   background: #111;
   color: white;
+}
+
+.end-screen-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.end-screen-actions button {
+  min-width: 180px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--app-gold);
+  color: #573804;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.end-screen-actions button:hover {
+  background: #ffe5a5;
 }

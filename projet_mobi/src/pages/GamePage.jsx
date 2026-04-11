@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
 import BattleArena from "../components/game/BattleArena";
 import EndScreen from "../components/EndScreen";
 import { subscribeToGame, attack, defend } from "../services/gameService";
@@ -13,18 +14,66 @@ export default function GamePage() {
   const { gameId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const previousHpRef = useRef(null);
   const [gameState, setGameState] = useState({
     game: undefined,
     error: "",
+  });
+  const [lifeFeedback, setLifeFeedback] = useState({
+    open: false,
+    message: "",
+    severity: "info",
   });
 
   // Ecouter la partie active
   useEffect(() => {
     if (!gameId || !user) return;
 
+    previousHpRef.current = null;
+
     const unsub = subscribeToGame(
       gameId,
       (nextGame) => {
+        if (nextGame?.playerA && nextGame?.playerB) {
+          const isCurrentPlayerA = nextGame.playerA.uid === user.uid;
+          const currentMe = isCurrentPlayerA
+            ? nextGame.playerA
+            : nextGame.playerB;
+          const currentOpponent = isCurrentPlayerA
+            ? nextGame.playerB
+            : nextGame.playerA;
+          const previousHp = previousHpRef.current;
+
+          if (previousHp) {
+            const lostHp = Math.max(0, previousHp.me - currentMe.hp);
+            const opponentLostHp = Math.max(
+              0,
+              previousHp.opponent - currentOpponent.hp,
+            );
+
+            if (lostHp > 0) {
+              setLifeFeedback({
+                open: true,
+                message: `Tu as perdu ${lostHp} vie${lostHp > 1 ? "s" : ""}.`,
+                severity: "warning",
+              });
+            } else if (opponentLostHp > 0) {
+              setLifeFeedback({
+                open: true,
+                message: `L'adversaire a perdu ${opponentLostHp} vie${
+                  opponentLostHp > 1 ? "s" : ""
+                }.`,
+                severity: "success",
+              });
+            }
+          }
+
+          previousHpRef.current = {
+            me: currentMe.hp,
+            opponent: currentOpponent.hp,
+          };
+        }
+
         setGameState({
           game: nextGame,
           error: "",
@@ -42,6 +91,13 @@ export default function GamePage() {
     return unsub;
   }, [gameId, user]);
   const { game, error: gameError } = gameState;
+
+  const handleCloseLifeFeedback = () => {
+    setLifeFeedback((current) => ({
+      ...current,
+      open: false,
+    }));
+  };
 
   const accessError = useMemo(() => {
     if (!user || !game) return "";
@@ -110,6 +166,20 @@ export default function GamePage() {
         <div className="game-shell">
           <EndScreen game={game} currentUser={user} />
         </div>
+        <Snackbar
+          open={lifeFeedback.open}
+          autoHideDuration={3000}
+          onClose={handleCloseLifeFeedback}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={handleCloseLifeFeedback}
+            severity={lifeFeedback.severity}
+            variant="filled"
+          >
+            {lifeFeedback.message}
+          </Alert>
+        </Snackbar>
       </div>
     );
   }
@@ -191,6 +261,20 @@ export default function GamePage() {
           onTakeHit={() => defend(gameId, null)}
         />
       </div>
+      <Snackbar
+        open={lifeFeedback.open}
+        autoHideDuration={3000}
+        onClose={handleCloseLifeFeedback}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseLifeFeedback}
+          severity={lifeFeedback.severity}
+          variant="filled"
+        >
+          {lifeFeedback.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

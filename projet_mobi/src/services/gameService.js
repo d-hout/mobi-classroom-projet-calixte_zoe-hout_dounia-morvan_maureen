@@ -282,6 +282,37 @@ export function subscribeToGame(gameId, callback, onError) {
   });
 }
 
+export function subscribeToUserGames(uid, callback, onError) {
+  const gamesRef = ref(rtdb, "games");
+
+  return onValue(gamesRef, (snapshot) => {
+    if (!snapshot.exists() || !uid) {
+      callback([]);
+      return;
+    }
+
+    const games = Object.entries(snapshot.val() || {})
+      .map(([id, game]) => ({ id, ...game }))
+      .filter((game) => {
+        const isListedPlayer = !!game.players?.[uid];
+        const isPlayerA = game.playerAUser?.uid === uid;
+        const isPlayerB = game.playerBUser?.uid === uid;
+
+        return game.status === "finished" && (isListedPlayer || isPlayerA || isPlayerB);
+      })
+      .sort(
+        (a, b) =>
+          (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0),
+      );
+
+    callback(games);
+  }, (error) => {
+    console.error("[subscribeToUserGames] read failed:", error);
+    callback([]);
+    if (onError) onError(error);
+  });
+}
+
 export async function attack(gameId, attackerCardId) {
   const gameRef = ref(rtdb, `games/${gameId}`);
 

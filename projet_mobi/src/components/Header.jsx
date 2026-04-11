@@ -4,9 +4,11 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import CastleIcon from "@mui/icons-material/Castle";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import StyleIcon from "@mui/icons-material/Style";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { logoutUser } from "../services/authService";
@@ -59,6 +61,15 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
 
           <div>
+            <Button
+              component={Link}
+              to="/rules"
+              startIcon={<MenuBookIcon />}
+              color="inherit"
+              className="app-header-link"
+            >
+              Rules
+            </Button>
             <IconButton
               component={Link}
               to="/collection"
@@ -95,7 +106,9 @@ export default function Header() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profil</MenuItem>
+              <MenuItem component={Link} to="/profile" onClick={handleClose}>
+                Profil
+              </MenuItem>
               <MenuItem onClick={handleDeconnexion}>Se déconnecter</MenuItem>
             </Menu>
           </div>

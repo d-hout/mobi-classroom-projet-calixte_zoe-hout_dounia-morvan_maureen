@@ -34,8 +34,8 @@ function LoginPreviewCard({ card, variant }) {
       <h3>{card.name}</h3>
       <p>{getCardSource(card)}</p>
       <div className="stats-row">
-        <span>ATK {card.atk ?? "-"}</span>
-        <span>DEF {card.def ?? "-"}</span>
+        <span>Attaque {card.atk ?? "-"}</span>
+        <span>Défense {card.def ?? "-"}</span>
       </div>
     </div>
   );
@@ -101,13 +101,13 @@ function LoginPage() {
             rel="stylesheet"
           ></link>
           <h2>
-            Bienvenue dans l'univers Disney
+            Bienvenue dans le jeu Disney Card Battle
             <br />
-            <span> Crée ton deck pour remporter la partie </span>
+            <span> Un jeu de cartes immersif </span>
           </h2>
 
           <p>
-            Un jeu de cartes immersif
+            Plonge dans la magie de l'univers Disney et redécouvre les personnages qui ont façonné des générations.
             <br />
           </p>
 

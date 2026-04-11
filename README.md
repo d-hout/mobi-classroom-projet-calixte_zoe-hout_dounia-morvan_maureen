@@ -47,7 +47,7 @@ npm install
 npm run dev
 
 5. Observer le port du service avec l’adresse localhost : http://localhost:5173/
-URL du site : 
+URL du site déployé :  https://69da85d544882765acf2d2c5--prjmobi.netlify.app
 
 
 

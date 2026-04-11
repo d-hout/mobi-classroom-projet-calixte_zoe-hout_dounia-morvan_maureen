@@ -15,7 +15,7 @@ Ce jeu permet aux joueurs de s'affronter en temps réel dans des duels stratégi
 
 ## 🎯 Objectifs du projet
 * 🔐 **Authentification** : Connexion via Google avec FirebaseAuth.
-* 📚 **Bibliothèque** : Consultation d'une bibliothèque de cartes via l'API [Marvel](https://www.marvel.com/characters/3-d-man-chandler).
+* 📚 **Bibliothèque** : Consultation d'une bibliothèque de cartes via l'API [Disney](https://disneyapi.dev/).
 * 🎴 **Deck Building** : Construction et sauvegarde d’un deck de 10 cartes.
 * ⚔️ **Combat** : Système de tour à tour / logique de combat (attaque, défense, PV).
 * 📈 **Statistiques** : Mise à jour des résultats de parties.
@@ -23,7 +23,7 @@ Ce jeu permet aux joueurs de s'affronter en temps réel dans des duels stratégi
 ## 🛠️ Technologies utilisées
 * **Framework** : React.js (Vite)
 * **Backend / Auth** : Firebase (Authentication & Firestore)
-* **API** : Marvel API
+* **API** : Disney API
 * **Tests** : Vitest / Jest
 
 ---

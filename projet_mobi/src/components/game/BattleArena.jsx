@@ -63,7 +63,10 @@ export default function BattleArena({
           </div>
           <strong>Adversaire</strong>
           <span>{opponent?.name || "Joueur"}</span>
-          <HeartMeter hp={opponent?.hp} />
+          <div className="ba-hp-row">
+            <span className="ba-hp-label">PV :</span>
+            <HeartMeter hp={opponent?.hp} />
+          </div>
           <span className="ba-deck-count">{deckCountLabel(opponent)}</span>
         </div>
         <div className="ba-pv">
@@ -76,7 +79,10 @@ export default function BattleArena({
           </div>
           <strong>Moi</strong>
           <span>{me?.name || "Joueur"}</span>
-          <HeartMeter hp={me?.hp} />
+          <div className="ba-hp-row">
+            <span className="ba-hp-label">PV :</span>
+            <HeartMeter hp={me?.hp} />
+          </div>
           <span className="ba-deck-count">{deckCountLabel(me)}</span>
         </div>
       </section>

@@ -351,6 +351,20 @@
   line-height: 1;
 }
 
+/* label PV coeurs  */
+.ba-hp-row {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ba-hp-label {
+  color: #4f5f7f;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
 .ba-heart {
   display: inline-flex;
   font-size: 1.15rem;

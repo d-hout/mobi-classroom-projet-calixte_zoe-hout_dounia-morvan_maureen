@@ -88,6 +88,13 @@ Améliorations
 → mettre des règles de jeu avant le lancement de la partie
 → rendre visible ce qui est cliquable 
 
+## TEST 8 : Kevin (hors ENSC)
+Date : 11/04/2026
+
+- j'avais pas compris que les points de vie c'était les coeurs (pv ça me parle pas)
+- le design est stylé 
+- "c'est des perso disney ?" 
+
 
 
 

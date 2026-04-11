@@ -48,3 +48,46 @@ Points négatifs :
 
 => Finaliser l'onglet Deck dans la navbar
 ---
+
+## TEST 5
+👥 Lucie 
+Date : 09/04/2026 	
+Ajouter le nombre de cartes restantes du deck 
+Masquer les stats des cartes de l’adversaire 
+possibilité de retourner à l’accueil en fin de partie 
+
+
+
+## TEST 6
+👥 Kinsy (hors ENSC)
+Date : 10/10/2026 	
+
+Verbatims et remarques: 
+- "personnages bizarres et anciens, “je m’attendais à voir les personnages connus”
+- "texte “ATK” et “DEF” pas super explicite → un texte en toute lettre est préférable
+- choix des personnages par affinité et non stratégique par rapport aux statistiques
+- le placement des terrains pas compréhensible
+- n’a pas cliquer sur “encaisser” car ne savait pas ce que ça signifiait 
+- au bout de la 3ème partie  a compris la logique du jeu 
+- “j'avais l’impression de jouer sans savoir ce que ça faisait à l’adversaire” → AUGMENTER LES RETOURS UTILISATEURS 
+- PV INCOMPRÉHENSIBLE, “dans aucun jeu c’est marqué point de vie comme ça”
+- le fond disney est joli
+- en soit facile à jouer, “le jeu m’amenait à jouer, propose des cartes sans dire quelle carte jouer, on sait quand c’est à nous, c’est clairement affiché” 
+
+
+
+## TEST 7
+👥 Enzo (hors ENSC)
+Date : 10/10/2026 
+	
+- “J’ai pas compris comment jouer au début”
+- Faudrait faire une sorte de schéma pour expliquer comment utiliser les cartes, au début on est un peu perdu”,, “On sait pas sur quoi appuyer, est ce que pour attaquer on clique sur la carte adversaire qu’on veut attaquer ou sur notre carte et pareil pour la défense”
+- “Sinon le jeu est fun à jouer”
+
+Améliorations 
+→ mettre des règles de jeu avant le lancement de la partie
+→ rendre visible ce qui est cliquable 
+
+
+
+

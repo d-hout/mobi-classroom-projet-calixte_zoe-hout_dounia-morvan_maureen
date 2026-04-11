@@ -2,9 +2,9 @@
 > **Documentation Projet Développement Mobile **
 
 ## 👥 Équipe (Groupe 3)
-* [**Calixte Zoé**](lien)
-* [**Hout Dounia**](Lien)
-* [**Morvan Maureen**](Lien)
+* [**Calixte Zoé**] https://github.com/zcalixte
+* [**Hout Dounia**]https://github.com/maumorvan
+* [**Morvan Maureen**]https://github.com/d-hout
 
 ---
 
